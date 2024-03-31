@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class pembayaranlistrik extends Model
 {
     use HasFactory;
-    protected $table = 'pembayaranlistrik';
+    protected $table = 'pembayaran_listrik';
 }

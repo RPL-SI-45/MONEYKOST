@@ -12,14 +12,14 @@
                 <th>Bukti</th>
                 <th>Status</th>
             </tr>
-            @foreach($pembayaranlistrik as $pembayaranlistrik)
+            @foreach($pembayaranlistrik as $pl)
                 <tr>
-                    <td>{{ $pembayaranlistrik->id }}</td>
-                    <td>{{ $pembayaranlistrik->tanggaltagihan }}</td>
-                    <td>{{ $pembayaranlistrik->jumlah }}</td>
-                    <td>{{ $pembayaranlistrik->kwh }}</td>
-                    <td>{{ $pembayaranlistrik->bukti }}</td>
-                    <td>{{ $pembayaranlistrik->status }}</td>
+                    <td>{{ $pl->id }}</td>
+                    <td>{{ $pl->tanggaltagihan }}</td>
+                    <td>{{ $pl->jumlah }}</td>
+                    <td>{{ $pl->kwh }}</td>
+                    <td>{{ $pl->bukti }}</td>
+                    <td>{{ $pl->status }}</td>
                 </tr>
             @endforeach
         </table>

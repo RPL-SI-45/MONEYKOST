@@ -10,6 +10,6 @@ class ListrikController extends Controller
 {
     public function index(){
         $pembayaranlistrik = pembayaranlistrik::all();
-        return view('pembayaranlistrik.index', compact(('warga')));
+        return view('pembayaranlistrik.index', compact(['pembayaranlistrik']));
     }
 }
