@@ -25,3 +25,4 @@ Route::get('/kelola_pembayaran_kost/create', [KelolaPembayaranKostController::cl
 Route::post('/kelola_pembayaran_kost/store', [KelolaPembayaranKostController::class,'store']);
 Route::get('/kelola_pembayaran_kost/{id}/edit', [KelolaPembayaranKostController::class,'edit']);
 Route::put('/kelola_pembayaran_kost/{id}', [KelolaPembayaranKostController::class,'update']);
+Route::delete('/kelola_pembayaran_kost/{id}', [KelolaPembayaranKostController::class,'destroy']);

@@ -18,7 +18,13 @@
                 {{$p->bukti_Pembayaran_Kost}}
             </td>
             <td>{{$p->status}}</td>
-            <td><a href="/kelola_pembayaran_kost/{{$p->id}}/edit">Edit</a></td>
+            <td><a href="/kelola_pembayaran_kost/{{$p->id}}/edit">Edit</a>
+                <form action="/kelola_pembayaran_kost/{{$p->id}}" method="POST">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
         </tr>
     @endforeach
 </table>
