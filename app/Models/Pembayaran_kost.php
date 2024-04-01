@@ -9,4 +9,5 @@ class Pembayaran_kost extends Model
 {
     use HasFactory;
     protected $table = 'pembayaran_kost';
+    protected $guarded = [];
 }

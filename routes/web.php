@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\PembayaranKostController;
+use App\Http\Controllers\KelolaPembayaranKostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/pembayaran_kost', [PembayaranKostController::class,'index']);
+
+Route::get('/kelola_pembayaran_kost', [KelolaPembayaranKostController::class,'index']);
+Route::get('/kelola_pembayaran_kost/create', [KelolaPembayaranKostController::class,'create']);
+Route::post('/kelola_pembayaran_kost/store', [KelolaPembayaranKostController::class,'store']);
+Route::get('/kelola_pembayaran_kost/{id}/edit', [KelolaPembayaranKostController::class,'edit']);
+Route::put('/kelola_pembayaran_kost/{id}', [KelolaPembayaranKostController::class,'update']);
