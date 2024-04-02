@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+//wifi
+Route::get('/wifi', function () {
+    return view('pages.pembayaranwifi-customer');
 });
