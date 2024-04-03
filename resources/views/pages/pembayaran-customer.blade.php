@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Customer', 'titleSub' => 'Customer : '. Auth::user()->username])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Customer', 'titleSub' => 'Customer : '])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -49,14 +49,38 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if ($item['status'] == 'lunas')
-                                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
+                                            <a href="{{ asset('storage/' . $item['bukti']) }}" class="text-secondary font-weight-bold text-xs"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 File
                                             </a>
                                             @else
-                                            <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                UPLOAD BUKTI
-                                            </button>
+                                            <button type="button" class="btn btn-block btn-default mb-3" data-bs-toggle="modal" data-bs-target="#modal-form">Upload Bukti</button>
+                                            <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body p-0">
+                                                            <div class="card card-plain">
+                                                                <div class="card-header pb-0 text-left">
+                                                                    <h3 class="font-weight-bolder text-info text-gradient">Upload Bukti</h3>
+                                                                    <p class="mb-0">Tolong upload bukti pembayaran anda !</p>
+                                                                </div>
+                                                            <div class="card-body">
+                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti', ['id' => $item['id']]) }}" enctype="multipart/form-data">
+                                                                    @csrf
+                                                                    @method('post')
+                                                                    <div class="input-group mb-3">
+                                                                        <input type="file" name='upload-bukti'>
+                                                                    </div>
+                                                                    @error('upload-bukti') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                                                    <div class="text-center">
+                                                                        <button type="submit" class="btn btn-round bg-gradient-info btn-lg w-100 mt-4 mb-0">Upload</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             @endif
                                         </td>
                                         <td class='align-middle text-center text-s'>

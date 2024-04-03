@@ -11,14 +11,10 @@ use Illuminate\Support\Facades\DB;
 class LaundryController extends Controller
 {
     public function index() {
-        if (Auth::check()) {
-            if (Auth::user()->auth == "admin") {
-                $users = User::where('auth', 'customer')->get();
-                return view('pages.tambah', [
-                    'users' => $users
-                ]);
-            }
-        }
+        $users = User::where('auth', 'customer')->get();
+        return view('pages.tambah', [
+            'users' => $users
+        ]);
     }
 
     public function tambah() {
@@ -32,6 +28,21 @@ class LaundryController extends Controller
         $attributes['bukti'] = '';
         $attributes['status'] = 'belum lunas';
         Pembayaran::create($attributes);
-        return redirect('/dashboard');
+        return redirect("/dashboard/admin");
+    }
+
+    public function upload(int $id) {
+        request()->validate([
+            'upload-bukti' => 'required|image|mimes:jpeg,jpg,png,gif',
+        ]);
+        if (request()->file()) {
+            $fileName = time().'_cust.'.request()->file('upload-bukti')->extension();
+            $filePath = request()->file('upload-bukti')->storeAs('bukti', $fileName, 'public');
+            $data = Pembayaran::where('id', $id)->update([
+                "bukti" => "bukti/" . $fileName,
+                "status" => "lunas"
+            ]);
+            return redirect("/dashboard/customer");
+        }
     }
 }

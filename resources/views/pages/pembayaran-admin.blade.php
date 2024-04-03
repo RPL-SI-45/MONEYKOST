@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Admin', 'titleSub' => 'Admin : '. Auth::user()->username])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Admin', 'titleSub' => 'Admin : '])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -58,7 +58,7 @@
                                         </td>
                                         <td class="align-middle text-center">
                                             @if ($item['status'] == 'lunas')
-                                            <a href="{{ asset('img/' . $item['bukti']) }}" class="text-secondary font-weight-bold text-xs"
+                                            <a href="{{ asset('storage/' . $item['bukti']) }}" class="text-secondary font-weight-bold text-xs"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 File
                                             </a>
