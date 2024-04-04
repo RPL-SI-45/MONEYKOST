@@ -1,7 +1,12 @@
 <?php
 use App\Http\Controllers\{
-	PembayaranController,
 
+
+            
+
+=======
+	PembayaranController,
+	PembayaranWifiController,
 	LaundryController,
 	PembayaranKostController,
 	KostController
@@ -21,4 +26,9 @@ Route::get('/ubahStatus/{id}/{status}', [PembayaranKostController::class, 'ubah'
 Route::get('/tambahKost', [KostController::class, 'index'])->name('tambah.kost');
 Route::post('/tambahKost', [KostController::class, 'tambah'])->name('tambah-kost.perform');
 Route::post('/upload/{id}', [KostController::class, 'upload'])->name('upload-bukti');
+
+//Pembayaran wifi
+Route::get('/dashboard/{auth}/wifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi');
+Route::get('/ubahStatus/{id}/{status}', [PembayaranWifiController::class, 'ubah'])->name('ubah-status');
+
 
