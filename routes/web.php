@@ -1,28 +1,20 @@
 <?php
+use App\Http\Controllers\{
+	PembayaranController,
+	LaundryController,
+	PembayaranKostController,
+	KostController
+}; 
+// Pembayaran Laundry            
+Route::get('/dashboard/{auth}', [PembayaranController::class, 'index'])->name('home');
+Route::get('/ubahStatus/{id}/{status}', [PembayaranController::class, 'ubah'])->name('ubah-status');
+Route::get('/tambahLaundry', [LaundryController::class, 'index'])->name('tambah.laundry');
+Route::post('/tambahLaundry', [LaundryController::class, 'tambah'])->name('tambah-laundry.perform');
+Route::post('/upload/{id}', [LaundryController::class, 'upload'])->name('upload-bukti');
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PembayaranKostController;
-use App\Http\Controllers\KelolaPembayaranKostController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/pembayaran_kost', [PembayaranKostController::class,'index']);
-
-Route::get('/kelola_pembayaran_kost', [KelolaPembayaranKostController::class,'index']);
-Route::get('/kelola_pembayaran_kost/create', [KelolaPembayaranKostController::class,'create']);
-Route::post('/kelola_pembayaran_kost/store', [KelolaPembayaranKostController::class,'store']);
-Route::get('/kelola_pembayaran_kost/{id}/edit', [KelolaPembayaranKostController::class,'edit']);
-Route::put('/kelola_pembayaran_kost/{id}', [KelolaPembayaranKostController::class,'update']);
-Route::delete('/kelola_pembayaran_kost/{id}', [KelolaPembayaranKostController::class,'destroy']);
+//Pembayaran Kost
+Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost');
+Route::get('/ubahStatus/{id}/{status}', [PembayaranKostController::class, 'ubah'])->name('ubah-status');
+Route::get('/tambahKost', [KostController::class, 'index'])->name('tambah.kost');
+Route::post('/tambahKost', [KostController::class, 'tambah'])->name('tambah-kost.perform');
+Route::post('/upload/{id}', [KostController::class, 'upload'])->name('upload-bukti');
