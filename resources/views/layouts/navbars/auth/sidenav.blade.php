@@ -1,3 +1,4 @@
+
 <script src="{{asset('assets/js/argon-dashboard.js')}}"></script>
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
     id="sidenav-main">
@@ -7,6 +8,7 @@
         <a class="navbar-brand m-0" href="{{ route('home', ['auth' => 'admin']) }}"
             target="_blank">
             <img src="/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+
             <span class="ms-1 font-weight-bold">Money Kost</span>
         </a>
     </div>

@@ -29,7 +29,7 @@ class PembayaranController extends Controller
             // print_r($result[1]['status']);
             return view('pages.pembayaran-admin', ['data' => $result]);
         } else {
-            $user = User::where('username', 'ahmad')->first();
+            $user = User::where('username', 'ujang')->first();
             $data = Pembayaran::where('id_customer', $user->id)->get();
             $result = array();
             foreach($data as $item) {
