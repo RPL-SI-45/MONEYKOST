@@ -27,3 +27,8 @@ Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class,
 Route::get('/ubahStatus/{id}/{status}/wifi', [PembayaranWifiController::class, 'ubah'])->name('ubah-status-wifi');
 
 
+
+//wifi Customer
+Route::get('/wifi', function () {
+    return view('pages.pembayaranwifi-customer');
+});
