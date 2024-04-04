@@ -42,7 +42,7 @@ class PembayaranWifiController extends Controller
                     'bukti' => $item->bukti,
                 ];
             }
-            return view('pages.pembayaran-customer', ['data' => $result]);
+            return view('pages.pembayaran-wifi-customer', ['data' => $result]);
         }
     }
 
@@ -50,6 +50,6 @@ class PembayaranWifiController extends Controller
         $data = PembayaranWifi::where('id', $id)->update([
             "status" => $status == 0 ? 'belum lunas' : 'lunas'
         ]);
-        return redirect('/dashboard/adminwifi');
+        return redirect('/dashboard/admin/pembayaranwifi');
     }
 }

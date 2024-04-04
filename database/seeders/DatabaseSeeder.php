@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        DB::table('payment_wifi')->insert([
-            'id_customer' => 1,
-            'tanggal_tagihan' => '2024-03-22',
-            'paket' => '10 Mbps',
-
+        // DB::table('payment_wifi')->insert([
+        //     'id_customer' => 1,
+        //     'tanggal_tagihan' => '2024-03-22',
+        //     'paket' => '10 Mbps',
+        // ]);
         DB::table('pembayaran')->insert([
             'id_customer' => 1,
             'tanggal_tagihan' => '2024-03-22',
@@ -31,16 +31,15 @@ class DatabaseSeeder extends Seeder
             'status' => 'lunas',
         ]);
 
-        DB::table('payment_wifi')->insert([
-            'id_customer' => 1,
-            'tanggal_tagihan' => '2024-03-27',
-            'paket' => '20 Mbps',
-
+        // DB::table('payment_wifi')->insert([
+        //     'id_customer' => 1,
+        //     'tanggal_tagihan' => '2024-03-27',
+        //     'paket' => '20 Mbps',
+        // ]);
         DB::table('pembayaran')->insert([
             'id_customer' => 1,
             'tanggal_tagihan' => '2024-03-27',
             'berat' => '20 KG',
-
             'jumlah' => '125.000',
             'bukti' => '',
             'status' => 'belum lunas',

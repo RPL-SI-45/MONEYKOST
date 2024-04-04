@@ -78,8 +78,8 @@
                                                     Ubah Status
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item" href="{{ route('ubah-status', ['id' => $item['id_pembayaran'], 'status' => 1])}}">Lunas</a></li>
-                                                    <li><a class="dropdown-item" href="{{ route('ubah-status', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-kost', ['id' => $item['id_pembayaran'], 'status' => 1])}}">Lunas</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-kost', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
                                                 </ul>
                                             </div>
                                         </td>
