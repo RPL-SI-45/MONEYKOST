@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use App\Models\PembayaranWifiCustomer;
+use App\Models\PembayaranWifiUser;
 use Illuminate\Support\Facades\DB;
 
-class LaundryController extends Controller
+class WifiUserController extends Controller
 {
     public function index() {
         if (Auth::check()) {
@@ -25,12 +25,13 @@ class LaundryController extends Controller
         $attributes = request()->validate([
             'id_customer' => 'required',
             'tanggal_tagihan' => 'required',
+            'paket' => 'required',
             'jumlah' => 'required'
         ]);
         $attributes['jumlah'] = number_format($attributes['jumlah'], 0, ',', '.');
         $attributes['bukti'] = '';
         $attributes['status'] = 'belum lunas';
         Pembayaran::create($attributes);
-        return redirect('/wifi');
+        return redirect('/dashboard');
     }
 }
