@@ -21,13 +21,13 @@ class KostController extends Controller
         $attributes = request()->validate([
             'id_customer' => 'required',
             'tanggal_tagihan' => 'required',
-            'berat' => 'required',
+            'tipe_kamar' => 'required',
             'jumlah' => 'required'
         ]);
         $attributes['jumlah'] = number_format($attributes['jumlah'], 0, ',', '.');
         $attributes['bukti'] = '';
         $attributes['status'] = 'belum lunas';
-        Pembayaran::create($attributes);
+        PembayaranKost::create($attributes);
         return redirect("/dashboard/admin/pembayarankost");
     }
 

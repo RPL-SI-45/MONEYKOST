@@ -27,8 +27,8 @@
                                 @error('tanggal') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="beratInput" class="form-control-label">Tipe Kamar</label>
-                                <input class="form-control" type="number" name="berat" id="beratInput">
+                                <label for="tipeKamarInput" class="form-control-label">Tipe Kamar</label>
+                                <input class="form-control" type="text" name="tipe_kamar" id="tipeKamarInput">
                                 @error('tipe_kamar') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
