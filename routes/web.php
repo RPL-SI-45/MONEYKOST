@@ -4,8 +4,11 @@ use App\Http\Controllers\{
 	PembayaranWifiController,
 	LaundryController,
 	PembayaranKostController,
-	KostController
+	KostController,
+  ListrikController,
+  PembayaranListrikController
 }; 
+
 // Pembayaran Laundry            
 
 Route::get('/dashboard/{auth}', [PembayaranController::class, 'index'])->name('home');
@@ -13,6 +16,7 @@ Route::get('/ubahStatus/{id}/{status}/laundry', [PembayaranController::class, 'u
 Route::get('/tambahLaundry', [LaundryController::class, 'index'])->name('tambah.laundry');
 Route::post('/tambahLaundry', [LaundryController::class, 'tambah'])->name('tambah-laundry.perform');
 Route::post('/upload/{id}', [LaundryController::class, 'upload'])->name('upload-bukti');
+
 
 
 //Pembayaran Kost
@@ -32,3 +36,5 @@ Route::get('/ubahStatus/{id}/{status}/wifi', [PembayaranWifiController::class, '
 Route::get('/wifi', function () {
     return view('pages.pembayaranwifi-customer');
 });
+
+Route::get('/pembayaranlistrik',[ListrikController::class, 'index']);
