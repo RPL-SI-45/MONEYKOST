@@ -30,7 +30,12 @@ Route::post('/upload/{id}', [KostController::class, 'upload'])->name('upload-buk
 Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi');
 Route::get('/ubahStatus/{id}/{status}/wifi', [PembayaranWifiController::class, 'ubah'])->name('ubah-status-wifi');
 
-
+//Pembayaran Listrik
+Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik');
+Route::get('/ubahStatus/{id}/{status}/listrik', [PembayaranListrikController::class, 'ubah'])->name('ubah-status-listrik');
+Route::get('/tambahListrik', [ListrikController::class, 'index'])->name('tambah.listrik');
+Route::post('/tambahListrik', [ListrikController::class, 'tambah'])->name('tambah-listrik.perform');
+Route::post('/upload/{id}', [ListrikController::class, 'upload'])->name('upload-bukti');
 
 //wifi Customer
 Route::get('/wifi', function () {

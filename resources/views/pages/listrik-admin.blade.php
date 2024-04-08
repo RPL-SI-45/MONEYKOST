@@ -51,7 +51,7 @@
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $item['tanggaltagihan'];}}</p>
                                         </td>
                                         <td>
-                                            <p class="text-center text-xs font-weight-bold mb-0">Rp. {{ $item['jumlah'];}}</p>
+                                            <p class="text-center text-xs font-weight-bold mb-0">{{ $item['jumlah'];}}</p>
                                         </td>
                                         <td>
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $item['kwh'];}}</p>
@@ -79,8 +79,8 @@
                                                     Ubah Status
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item" href="{{ route('ubah-statuslistrik', ['id' => $item['id_pembayaran'], 'status' => 1])}}">Lunas</a></li>
-                                                    <li><a class="dropdown-item" href="{{ route('ubah-statuslistrik', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-listrik', ['id' => $item['id_pembayaran'], 'status' => 1])}}">Lunas</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-listrik', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
                                                 </ul>
                                             </div>
                                         </td>
