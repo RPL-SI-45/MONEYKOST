@@ -62,7 +62,7 @@
                                                                     <p class="mb-0">Tolong upload bukti pembayaran anda !</p>
                                                                 </div>
                                                             <div class="card-body">
-                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti', ['id' => $item['id']]) }}" enctype="multipart/form-data">
+                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti-kost', ['id' => $item['id']]) }}" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('post')
                                                                     <div class="input-group mb-3">
