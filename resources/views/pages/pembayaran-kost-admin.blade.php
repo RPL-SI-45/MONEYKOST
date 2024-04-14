@@ -82,7 +82,6 @@
                                                     <li><a class="dropdown-item" href="{{ route('ubah-status-kost', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
                                                 </ul>
                                             </div>
-                                            <!-- <button type="button" class="btn btn-danger" href="{{ route('delete-kost', ['id' => $item['id_pembayaran']])}}">Delete</button> -->
                                             <form action="/hapus/{{ $item['id_pembayaran']; }}" method = "POST">
                                                 @csrf
                                                 @method('delete')

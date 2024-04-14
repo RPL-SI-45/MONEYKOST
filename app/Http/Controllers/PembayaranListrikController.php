@@ -52,4 +52,8 @@ class PembayaranListrikController extends Controller
         ]);
         return redirect('/dashboard/admin/pembayaranlistrik');
     }
+    public function destroy(int $id) {
+        $data = Pembayaranlistrik::where('id', $id)->delete();
+        return redirect('/dashboard/admin/pembayaranlistrik');
+    } 
 }

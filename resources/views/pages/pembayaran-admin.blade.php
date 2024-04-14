@@ -83,6 +83,11 @@
                                                     <li><a class="dropdown-item" href="{{ route('ubah-status-laundry', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
                                                 </ul>
                                             </div>
+                                            <form action="/hapuslaundry/{{ $item['id_pembayaran']; }}" method = "POST">
+                                                @csrf
+                                                @method('delete')
+                                                <input type="submit" class="btn btn-danger"  value="Delete">
+                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach

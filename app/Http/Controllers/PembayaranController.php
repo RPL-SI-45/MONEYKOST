@@ -52,4 +52,9 @@ class PembayaranController extends Controller
         ]);
         return redirect('/dashboard/admin');
     }
+
+    public function destroy(int $id) {
+        $data = Pembayaran::where('id', $id)->delete();
+        return redirect('/dashboard/admin');
+    } 
 }

@@ -16,16 +16,14 @@ Route::get('/ubahStatus/{id}/{status}/laundry', [PembayaranController::class, 'u
 Route::get('/tambahLaundry', [LaundryController::class, 'index'])->name('tambah.laundry');
 Route::post('/tambahLaundry', [LaundryController::class, 'tambah'])->name('tambah-laundry.perform');
 Route::post('/upload/{id}/laundry', [LaundryController::class, 'upload'])->name('upload-bukti-laundry');
-
-
+Route::delete('/hapuslaundry/{id}', [PembayaranController::class, 'destroy'])->name('delete-laundry');
 
 //Pembayaran Kost
 Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost');
 Route::get('/ubahStatus/{id}/{status}/kost', [PembayaranKostController::class, 'ubah'])->name('ubah-status-kost');
 Route::get('/tambahKost', [KostController::class, 'index'])->name('tambah.kost');
 Route::post('/tambahKost', [KostController::class, 'tambah'])->name('tambah-kost.perform');
-Route::post('/upload/{id}', [KostController::class, 'upload'])->name('upload-bukti');
-Route::delete('/hapus/{id}', [PembayaranKostController::class, 'destroy'])->name('delete-kost');
+Route::delete('/hapuskost/{id}', [PembayaranKostController::class, 'destroy'])->name('delete-kost');
 Route::post('/upload/{id}/kost', [KostController::class, 'upload'])->name('upload-bukti-kost');
 
 //Pembayaran wifi
@@ -38,7 +36,7 @@ Route::get('/ubahStatus/{id}/{status}/listrik', [PembayaranListrikController::cl
 Route::get('/tambahListrik', [ListrikController::class, 'index'])->name('tambah.listrik');
 Route::post('/tambahListrik', [ListrikController::class, 'tambah'])->name('tambah-listrik.perform');
 Route::post('/upload/{id}/listrik', [ListrikController::class, 'upload'])->name('upload-bukti-listrik');
-
+Route::delete('/hapuslistrik/{id}', [PembayaranListrikController::class, 'destroy'])->name('delete-listrik');
 //wifi Customer
 Route::get('/wifi', function () {
     return view('pages.pembayaranwifi-customer');
