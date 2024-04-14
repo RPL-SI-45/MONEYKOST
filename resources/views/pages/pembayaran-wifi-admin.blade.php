@@ -1,14 +1,13 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Admin', 'titleSub' => 'Admin : '])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Wifi Admin', 'titleSub' => 'Admin : '])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                        <h6>Pembayaran Laundry</h6>
-                        <button type="button" class="btn btn-outline-info"><a href="{{route('tambah.laundry')}}" class="text-center text-uppercase text-secondary">Add Laundry</a></button>
+                        <h6>Pembayaran Wifi</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -24,7 +23,7 @@
                                             Tanggal Pembayaran</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Berat</th>
+                                            Paket Pembelian</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Jumlah</th>
                                         <th
@@ -51,7 +50,7 @@
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $item['tanggal_tagihan'];}}</p>
                                         </td>
                                         <td>
-                                            <p class="text-center text-xs font-weight-bold mb-0">{{ $item['berat'];}} KG</p>
+                                            <p class="text-center text-xs font-weight-bold mb-0">{{ $item['paket'];}}</p>
                                         </td>
                                         <td>
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $item['jumlah'];}}</p>
@@ -79,8 +78,8 @@
                                                     Ubah Status
                                                 </button>
                                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-laundry', ['id' => $item['id_pembayaran'], 'status' => 1])}}">Lunas</a></li>
-                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-laundry', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-wifi', ['id' => $item['id_pembayaran'], 'status' => 1])}}">Lunas</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('ubah-status-wifi', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
                                                 </ul>
                                             </div>
                                         </td>

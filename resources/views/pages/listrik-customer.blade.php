@@ -1,13 +1,13 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Kost Customer', 'titleSub' => 'Customer : '])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Listrik Customer', 'titleSub' => 'Customer : '])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <h6>Pembayaran Kost</h6>
+                        <h6>Pembayaran Listrik</h6>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
@@ -22,7 +22,8 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Jumlah</th>
-    
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            kwh</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Bukti</th>
@@ -38,12 +39,14 @@
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $item['id']; }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-center text-xs font-weight-bold mb-0">{{ $item['tanggal_tagihan'];}}</p>
+                                            <p class="text-center text-xs font-weight-bold mb-0">{{ $item['tanggaltagihan'];}}</p>
                                         </td>
                                         <td>
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $item['jumlah'];}}</p>
                                         </td>
-                                       
+                                        <td>
+                                            <p class="text-center text-xs font-weight-bold mb-0">{{ $item['kwh'];}}</p>
+                                        </td>
                                         <td class="align-middle text-center">
                                             @if ($item['status'] == 'lunas')
                                             <a href="{{ asset('storage/' . $item['bukti']) }}" class="text-secondary font-weight-bold text-xs"
@@ -62,7 +65,7 @@
                                                                     <p class="mb-0">Tolong upload bukti pembayaran anda !</p>
                                                                 </div>
                                                             <div class="card-body">
-                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti-kost', ['id' => $item['id']]) }}" enctype="multipart/form-data">
+                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti-listrik', ['id' => $item['id']]) }}" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('post')
                                                                     <div class="input-group mb-3">
