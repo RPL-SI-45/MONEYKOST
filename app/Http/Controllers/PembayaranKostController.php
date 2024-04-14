@@ -52,4 +52,8 @@ class PembayaranKostController extends Controller
         ]);
         return redirect('/dashboard/admin/pembayarankost');
     }
+    public function destroy(int $id) {
+        $data = PembayaranKost::where('id', $id)->delete();
+        return redirect('/dashboard/admin/pembayarankost');
+    } 
 }
