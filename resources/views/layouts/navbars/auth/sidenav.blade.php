@@ -1,7 +1,7 @@
 
 
 <script src="{{asset('assets/js/argon-dashboard.js')}}"></script>
-
+<link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
     id="sidenav-main">
     <div class="sidenav-header">
@@ -10,46 +10,45 @@
         <a class="navbar-brand m-0" href="{{ route('home', ['auth' => 'admin']) }}"
             target="_blank">
 
-            <img src="/img/logo-ct-dark.png" class="navbar-brand-img h-100" alt="main_logo">
+            <img src="/img/logo-ct-dark.png" class="navbar-brand-img h-200" alt="main_logo">
 
 
-            <span class="ms-1 font-weight-bold">Money Kost</span>
+            <span class="ms-3 font-weight-bold">Money Kost</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home', ['auth' => 'admin']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chart-bar-32 text-info text-sm opacity-10"></i>
-                    </div>
-
-                    <span class="nav-link-text ms-1">Pembayaran Laundry</span>
-                </a>
+                
                 <a class="nav-link" href="{{ route('pembayarankost', ['auth' => 'admin']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chart-bar-32 text-info text-sm opacity-10"></i>
+                        <i class="ni ni-money-coins text-info text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Kost</span>
-
                 </a>
                    <a class="nav-link" href="{{ route('pembayaranwifi', ['auth' => 'admin']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chart-bar-32 text-info text-sm opacity-10"></i>
+                        <i class="ni ni-world-2 text-info text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Wifi</span>
+                </a>
 
+                <a class="nav-link" href="{{ route('home', ['auth' => 'admin']) }}">
+                    <div
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bag-17 text-info text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Pembayaran Laundry</span>
                 </a>
 
                 </a>
                    <a class="nav-link" href="{{ route('pembayaranlistrik', ['auth' => 'admin']) }}">
-                    <div
+                   <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chart-bar-32 text-info text-sm opacity-10"></i>
+                        <i class="ni ni-sound-wave text-info text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Listrik</span>
 
