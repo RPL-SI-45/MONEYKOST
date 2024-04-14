@@ -24,6 +24,8 @@ Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class,
 Route::get('/ubahStatus/{id}/{status}/kost', [PembayaranKostController::class, 'ubah'])->name('ubah-status-kost');
 Route::get('/tambahKost', [KostController::class, 'index'])->name('tambah.kost');
 Route::post('/tambahKost', [KostController::class, 'tambah'])->name('tambah-kost.perform');
+Route::post('/upload/{id}', [KostController::class, 'upload'])->name('upload-bukti');
+Route::delete('/hapus/{id}', [PembayaranKostController::class, 'destroy'])->name('delete-kost');
 Route::post('/upload/{id}/kost', [KostController::class, 'upload'])->name('upload-bukti-kost');
 
 //Pembayaran wifi
@@ -41,3 +43,4 @@ Route::post('/upload/{id}/listrik', [ListrikController::class, 'upload'])->name(
 Route::get('/wifi', function () {
     return view('pages.pembayaranwifi-customer');
 });
+
