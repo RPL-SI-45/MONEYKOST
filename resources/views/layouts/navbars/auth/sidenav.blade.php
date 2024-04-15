@@ -24,14 +24,14 @@
                 <a class="nav-link" href="{{ route('pembayarankost', ['auth' => 'admin']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-money-coins text-info text-sm opacity-10"></i>
+                        <i class="ni ni-money-coins text-success text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Kost</span>
                 </a>
                    <a class="nav-link" href="{{ route('pembayaranwifi', ['auth' => 'admin']) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-world-2 text-info text-sm opacity-10"></i>
+                        <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Wifi</span>
                 </a>
@@ -48,7 +48,7 @@
                    <a class="nav-link" href="{{ route('pembayaranlistrik', ['auth' => 'admin']) }}">
                    <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-sound-wave text-info text-sm opacity-10"></i>
+                        <i class="ni ni-sound-wave text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Listrik</span>
 
