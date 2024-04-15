@@ -14,12 +14,13 @@ class CreatePembayaranWifiUserTable extends Migration
     public function up()
     {
         Schema::create('pembayaran_wifi_users', function (Blueprint $table) {
-            $table->string('idPembayaranUser', 255)->primary();
-            $table->date('Tanggal_Tagihan'); 
-            $table->integer('Jumlah');
-            $table->string('Bukti'); 
-            $table->boolean('Status')->default(false);
-            $table->timestamps(); 
+            $table->id();
+            $table->unsignedBigInteger('id_customer');
+            $table->date('tanggal_tagihan');
+            $table->string('paket');
+            $table->string('jumlah');
+            $table->string('bukti');
+            $table->string('status');
         });
     }
 
