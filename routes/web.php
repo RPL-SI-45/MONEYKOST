@@ -41,4 +41,4 @@ Route::delete('/hapuslistrik/{id}', [PembayaranListrikController::class, 'destro
 Route::get('/wifi', function () {
     return view('pages.pembayaranwifi-customer');
 });
-
+Route::get('/tambahWifi', [KostController::class, 'index'])->name('tambah.wifi');

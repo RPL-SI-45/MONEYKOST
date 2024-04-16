@@ -14,9 +14,13 @@
                             @csrf
                             @method('post')
                             <div class="form-group">
-                                <label for="idInput" class="form-control-label">ID Pembayaran</label>
-                                <input class="form-control" type="number" name="id" id="idInput">
-                                @error('id') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                <select class="form-control" name="id_customer">
+                                    <option selected>Nama Customer</option>
+                                    @foreach ($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->username }}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_customer') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
                                 <label for="tanggalInput" class="form-control-label">Tanggal Tagihan</label>

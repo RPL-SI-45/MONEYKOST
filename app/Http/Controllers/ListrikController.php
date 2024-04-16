@@ -42,7 +42,7 @@ class ListrikController extends Controller
                 "bukti" => "bukti/" . $fileName,
                 "status" => "lunas"
             ]);
-            return redirect("/dashboard/customer");
+            return redirect("/dashboard/customer/pembayaranlistrik");
         }
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Customer', 'titleSub' => 'Customer : '])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Wifi Customer', 'titleSub' => 'Customer : '])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -23,6 +23,9 @@
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                             Jumlah</th>
+                                        <th
+                                            class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Paket</th>
                                        
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
