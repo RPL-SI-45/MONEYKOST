@@ -5,8 +5,9 @@ use App\Http\Controllers\{
 	LaundryController,
 	PembayaranKostController,
 	KostController,
-  ListrikController,
-  PembayaranListrikController
+  	ListrikController,
+  	PembayaranListrikController,
+	WifiController
 }; 
 
 // Pembayaran Laundry            
@@ -29,6 +30,7 @@ Route::post('/upload/{id}/kost', [KostController::class, 'upload'])->name('uploa
 //Pembayaran wifi
 Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi');
 Route::get('/ubahStatus/{id}/{status}/wifi', [PembayaranWifiController::class, 'ubah'])->name('ubah-status-wifi');
+Route::delete('/hapuswifi/{id}', [PembayaranWifiController::class, 'destroy'])->name('delete-wifi');
 
 //Pembayaran Listrik
 Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik');
@@ -37,8 +39,8 @@ Route::get('/tambahListrik', [ListrikController::class, 'index'])->name('tambah.
 Route::post('/tambahListrik', [ListrikController::class, 'tambah'])->name('tambah-listrik.perform');
 Route::post('/upload/{id}/listrik', [ListrikController::class, 'upload'])->name('upload-bukti-listrik');
 Route::delete('/hapuslistrik/{id}', [PembayaranListrikController::class, 'destroy'])->name('delete-listrik');
+
 //wifi Customer
-Route::get('/wifi', function () {
-    return view('pages.pembayaranwifi-customer');
-});
-Route::get('/tambahWifi', [KostController::class, 'index'])->name('tambah.wifi');
+Route::get('/tambahWifi', [WifiController::class, 'index'])->name('tambah.wifi');
+Route::post('/tambahWifi', [WifiController::class, 'tambah'])->name('tambah-wifi.perform');
+Route::post('/upload/{id}/wifi', [WifiController::class, 'upload'])->name('upload-bukti-wifi');

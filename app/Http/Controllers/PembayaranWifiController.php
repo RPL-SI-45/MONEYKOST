@@ -42,7 +42,7 @@ class PembayaranWifiController extends Controller
                     'bukti' => $item->bukti,
                 ];
             }
-            return view('pages.pembayaran-wifi-customer', ['data' => $result]);
+            return view('pages.pembayaranwifi-customer', ['data' => $result]);
         }
     }
 
@@ -52,4 +52,8 @@ class PembayaranWifiController extends Controller
         ]);
         return redirect('/dashboard/admin/pembayaranwifi');
     }
+    public function destroy(int $id) {
+        $data = PembayaranWifi::where('id', $id)->delete();
+        return redirect('/dashboard/admin/pembayaranwifi');
+    } 
 }
