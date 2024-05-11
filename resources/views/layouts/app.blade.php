@@ -25,7 +25,7 @@
 
 <body class="{{ $class ?? '' }}">
 
-    <div class="min-height-300 bg-info position-absolute w-100"></div>
+    <div class="min-height-150 bg-info position-absolute w-100"></div>
             @include('layouts.navbars.auth.sidenav')
                 <main class="main-content border-radius-lg">
                     @yield('content')

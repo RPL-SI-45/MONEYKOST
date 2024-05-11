@@ -7,7 +7,8 @@ use App\Http\Controllers\{
 	KostController,
   	ListrikController,
   	PembayaranListrikController,
-	WifiController
+	WifiController,
+	DaftarMakananController
 }; 
 
 // Pembayaran Laundry            
@@ -44,3 +45,8 @@ Route::delete('/hapuslistrik/{id}', [PembayaranListrikController::class, 'destro
 Route::get('/tambahWifi', [WifiController::class, 'index'])->name('tambah.wifi');
 Route::post('/tambahWifi', [WifiController::class, 'tambah'])->name('tambah-wifi.perform');
 Route::post('/upload/{id}/wifi', [WifiController::class, 'upload'])->name('upload-bukti-wifi');
+
+
+//Daftar Makanan
+Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
+Route::get('/dashboard/menumakanan/{id}', [DaftarMakananController::class, 'show']);
