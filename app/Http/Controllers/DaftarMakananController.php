@@ -32,26 +32,65 @@ class DaftarMakananController extends Controller
         return view('pages.daftar-makanan-create', ['daftar_makanan' => $daftar_makanan ]);
     }
 
-    public function tambah() {
-        $attributes = request()->validate([
+    // public function tambah(Request $request) {
+    //     $attributes = request()->validate([
+    //         'nama_makanan' => 'required',
+    //         'harga_makanan' => 'required',
+    //         'tipe_makanan' => 'required',
+    //         'gambar_makanan' => 'required|image|mimes:jpeg,jpg,png,gif',
+    //     ]);
+    //     $file= $request->file('gambar_makanan');
+    //     $fileName = $file->getClientOriginalName(); // Mendapatkan nama file asli
+    //     $filePath = $file->storeAs('public', $fileName); // Menyimpan file dengan nama asli
+    //     $data = DaftarMakanan::where('id', $id)->update([
+    //             "gambar_makanan" => $fileName,
+    //         ]);
+
+    //     $attributes['harga_makanan'] = number_format($attributes['harga_makanan'], 0, ',', '.');
+    //     $attributes['gambar_makanan'] = $fileName;
+    //     $attributes['deskripsi_makanan'] = '';
+    //     DaftarMakanan::create($attributes);
+    //     return redirect("/dashboard/admin/kelolamenumakanan");
+    // }
+
+    public function tambah(Request $request) {
+        $attributes = $request->validate([
             'nama_makanan' => 'required',
             'harga_makanan' => 'required',
             'tipe_makanan' => 'required',
+            'deskripsi_makanan' => 'required',
+            'gambar_makanan' => 'required|image|mimes:jpeg,jpg,png,gif',
         ]);
-        $attributes['harga_makanan'] = number_format($attributes['harga_makanan'], 0, ',', '.');
-        $attributes['gambar_makanan'] = '';
-        $attributes['deskripsi_makanan'] = '';
-        DaftarMakanan::create($attributes);
+    
+        // Get the uploaded file
+        $file = $request->file('gambar_makanan');
+    
+        // Retrieve the original file name
+        $fileName = $file->getClientOriginalName();
+    
+        // Store the file with the original file name
+        $filePath = $file->storeAs('public', $fileName);
+    
+        // Update the database with the file name
+        $data = DaftarMakanan::create([
+            "nama_makanan" => $attributes['nama_makanan'],
+            "harga_makanan" => $attributes['harga_makanan'],
+            "tipe_makanan" => $attributes['tipe_makanan'],
+            "deskripsi_makanan" => $attributes['deskripsi_makanan'],
+            "gambar_makanan" => $fileName,
+        ]);
+    
+        // Optionally, you may want to redirect the user after successful upload
         return redirect("/dashboard/admin/kelolamenumakanan");
     }
 
-    public function upload(Request $request, $id) {
-        $requestData= $request->all();
-        $fileName = $file->getClientOriginalName(); // Mendapatkan nama file asli
-        $filePath = $file->storeAs('public', $fileName); // Menyimpan file dengan nama asli
-        $data = DaftarMakanan::where('id', $id)->update([
-                "gambar_makanan" => $fileName,
-            ]);
-    }
+    // public function upload(Request $request, $id) {
+    //     $requestData= $request->all();
+    //     $fileName = $file->getClientOriginalName(); // Mendapatkan nama file asli
+    //     $filePath = $file->storeAs('public', $fileName); // Menyimpan file dengan nama asli
+    //     $data = DaftarMakanan::where('id', $id)->update([
+    //             "gambar_makanan" => $fileName,
+    //         ]);
+    // }
 }
 
