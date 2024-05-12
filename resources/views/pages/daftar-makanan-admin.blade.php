@@ -47,7 +47,7 @@
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $data['harga_makanan'];}}</p>
                                         </td>
                                         <td>
-                                            <a href="../menumakanan/{{$data['id']}}" class="text-info font-weight-bold text-xs"
+                                            <a href="{{ asset('storage/' . $data['gambar_makanan']) }}" class="text-info font-weight-bold text-xs"
                                                 data-toggle="tooltip" data-original-title="Edit user">
                                                 File Gambar
                                             </a>
