@@ -58,7 +58,7 @@
                                         <td>
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ substr($data['deskripsi_makanan'], 0, 50) }}{{ strlen($data['deskripsi_makanan']) > 50 ? '...' : '' }}</p>
                                         <td class="align-middle">
-                                            <form action="" method = "POST">
+                                            <form action="/editmenu/{{ $data['id']; }}" method = "GET">
                                                 <input type="submit" class="btn btn-lg btn-info btn-sm w-80 mt-4 mb-0"  value="Edit">
                                             </form>
                                             <form action="/hapusmenu/{{ $data['id']; }}" method = "POST">

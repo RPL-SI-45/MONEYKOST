@@ -32,27 +32,6 @@ class DaftarMakananController extends Controller
         return view('pages.daftar-makanan-create', ['daftar_makanan' => $daftar_makanan ]);
     }
 
-    // public function tambah(Request $request) {
-    //     $attributes = request()->validate([
-    //         'nama_makanan' => 'required',
-    //         'harga_makanan' => 'required',
-    //         'tipe_makanan' => 'required',
-    //         'gambar_makanan' => 'required|image|mimes:jpeg,jpg,png,gif',
-    //     ]);
-    //     $file= $request->file('gambar_makanan');
-    //     $fileName = $file->getClientOriginalName(); // Mendapatkan nama file asli
-    //     $filePath = $file->storeAs('public', $fileName); // Menyimpan file dengan nama asli
-    //     $data = DaftarMakanan::where('id', $id)->update([
-    //             "gambar_makanan" => $fileName,
-    //         ]);
-
-    //     $attributes['harga_makanan'] = number_format($attributes['harga_makanan'], 0, ',', '.');
-    //     $attributes['gambar_makanan'] = $fileName;
-    //     $attributes['deskripsi_makanan'] = '';
-    //     DaftarMakanan::create($attributes);
-    //     return redirect("/dashboard/admin/kelolamenumakanan");
-    // }
-
     public function tambah(Request $request) {
         $attributes = $request->validate([
             'nama_makanan' => 'required',
@@ -62,16 +41,9 @@ class DaftarMakananController extends Controller
             'gambar_makanan' => 'required|image|mimes:jpeg,jpg,png,gif',
         ]);
     
-        // Get the uploaded file
         $file = $request->file('gambar_makanan');
-    
-        // Retrieve the original file name
         $fileName = $file->getClientOriginalName();
-    
-        // Store the file with the original file name
         $filePath = $file->storeAs('public', $fileName);
-    
-        // Update the database with the file name
         $data = DaftarMakanan::create([
             "nama_makanan" => $attributes['nama_makanan'],
             "harga_makanan" => $attributes['harga_makanan'],
@@ -86,6 +58,34 @@ class DaftarMakananController extends Controller
 
     public function destroy(int $id) {
         $data = DaftarMakanan::where('id', $id)->delete();
+        return redirect('/dashboard/admin/kelolamenumakanan');
+    }
+
+    public function edit($id) {
+        $daftar_makanan = DaftarMakanan::find($id);
+        return view('pages.daftar-makanan-edit', ['daftar_makanan' => $daftar_makanan ]);
+    }
+
+    public function update($id, Request $request) {
+        $attributes = $request->validate([
+            'nama_makanan' => 'required',
+            'harga_makanan' => 'required',
+            'tipe_makanan' => 'required',
+            'deskripsi_makanan' => 'required',
+            'gambar_makanan' => 'required|image|mimes:jpeg,jpg,png,gif',
+        ]);
+        $daftar_makanan = DaftarMakanan::find($id);
+        $file = $request->file('gambar_makanan');
+        $fileName = $file->getClientOriginalName();
+        $filePath = $file->storeAs('public', $fileName);
+        $data = DaftarMakanan::where('id', $id)->update([
+            "nama_makanan" => $attributes['nama_makanan'],
+            "harga_makanan" => $attributes['harga_makanan'],
+            "tipe_makanan" => $attributes['tipe_makanan'],
+            "deskripsi_makanan" => $attributes['deskripsi_makanan'],
+            "gambar_makanan" => $fileName,
+        ]);
+        // $daftar_makanan->update($request->except(['_token','submit']));
         return redirect('/dashboard/admin/kelolamenumakanan');
     }
 }
