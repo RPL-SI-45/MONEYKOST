@@ -54,3 +54,4 @@ Route::get('/dashboard/{auth}/kelolamenumakanan', [DaftarMakananController::clas
 Route::get('/dashboard/kelolamenumakanan/create', [DaftarMakananController::class, 'create'])->name('tambah.menu');
 Route::post('/upload-menumakanan/{id}', [DaftarMakananController::class, 'upload'])->name('upload-menumakanan');
 Route::post('/tambahMenu', [DaftarMakananController::class, 'tambah'])->name('tambah-menu.perform');
+Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');

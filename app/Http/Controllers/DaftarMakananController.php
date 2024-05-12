@@ -84,13 +84,9 @@ class DaftarMakananController extends Controller
         return redirect("/dashboard/admin/kelolamenumakanan");
     }
 
-    // public function upload(Request $request, $id) {
-    //     $requestData= $request->all();
-    //     $fileName = $file->getClientOriginalName(); // Mendapatkan nama file asli
-    //     $filePath = $file->storeAs('public', $fileName); // Menyimpan file dengan nama asli
-    //     $data = DaftarMakanan::where('id', $id)->update([
-    //             "gambar_makanan" => $fileName,
-    //         ]);
-    // }
+    public function destroy(int $id) {
+        $data = DaftarMakanan::where('id', $id)->delete();
+        return redirect('/dashboard/admin/kelolamenumakanan');
+    }
 }
 
