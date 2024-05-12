@@ -11,9 +11,11 @@
             <p class="card-text"><small class="text-muted">Rp. {{ $daftar_makanan['harga_makanan'] }}</small></p>
             <p class="card-text">{{ $daftar_makanan['deskripsi_makanan'] }}</p>
             <h1 class="font-sans text-sm text-gray-900 leading-8">Quantitiy</h1>
-            <p class="py-2 px-3 text-sm m-0" id="qty" data-object="{{ json_encode($daftar_makanan) }}">1</p>
-            <button class="btn btn-lg btn-danger" id="minusBtn">-</button>
-            <button class="btn btn-lg btn-success" id="plusBtn">+</button>
+            <div class="card card-sm" style="max-width: 100px;">
+                <p class="py-2 px-3 text-sm m-0" id="qty" data-object="{{ json_encode($daftar_makanan) }}">1</p>
+            </div>
+            <button class="btn btn-lg btn-danger btn-sm w-5 mt-2 mb-5" id="minusBtn">-</button>
+            <button class="btn btn-lg btn-success btn-sm w-5 mt-2 mb-5" id="plusBtn">+</button>
             <button id="addCartBtn" type="submit" class="btn btn-lg btn-info btn-lg w-100 mt-4 mb-0">Add to Cart</button>
         </div>
     </div>

@@ -56,15 +56,15 @@
                                             <p class="text-center text-xs font-weight-bold mb-0">{{ $data['tipe_makanan'];}}</p>
                                         </td>
                                         <td>
-                                        <p class="text-center text-xs font-weight-bold mb-0">{{ substr($data['deskripsi_makanan'], 0, 50) }}{{ strlen($data['deskripsi_makanan']) > 50 ? '...' : '' }}</p>
+                                            <p class="text-center text-xs font-weight-bold mb-0">{{ substr($data['deskripsi_makanan'], 0, 50) }}{{ strlen($data['deskripsi_makanan']) > 50 ? '...' : '' }}</p>
                                         <td class="align-middle">
                                             <form action="" method = "POST">
-                                                <input type="submit" class="btn btn-info"  value="Update">
+                                                <input type="submit" class="btn btn-lg btn-info btn-sm w-80 mt-4 mb-0"  value="Edit">
                                             </form>
                                             <form action="/hapusmenu/{{ $data['id']; }}" method = "POST">
                                                 @csrf
                                                 @method('delete')
-                                                <input type="submit" class="btn btn-danger"  value="Delete">
+                                                <input type="submit" class="btn btn-lg btn-danger w-80 btn-sm mt-3 mb-0"  value="Delete">
                                             </form>
                                         </td>
                                     </tr>

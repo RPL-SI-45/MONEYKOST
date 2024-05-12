@@ -15,6 +15,7 @@
                                     <p class="text-gray-700 text-base">
                                         Rp. {{$data['harga_makanan']}}
                                     </p>
+                                    <button class="btn btn-lg btn-info btn-rounded btn-lg w-100 mt-4 mb-0">Beli</button>
                                 </div>
                             </a>
                         </div>
