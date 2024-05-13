@@ -22,13 +22,13 @@ Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('hom
 Route::get('/dashboard/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
 
 //Pembayaran Kost
-Route::get('/laundry/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
+Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
 
 //Pembayaran wifi
-Route::get('/laundry/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi')->middleware('auth');;
+Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi')->middleware('auth');;
 
 //Pembayaran Listrik
-Route::get('/laundry/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');;
+Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');;
 
 //login
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
