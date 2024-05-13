@@ -50,7 +50,6 @@ Route::post('/upload/{id}/wifi', [WifiController::class, 'upload'])->name('uploa
 //Daftar Makanan
 Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
 Route::get('/dashboard/menumakanan/{id}', [DaftarMakananController::class, 'show']);
-Route::get('/dashboard/{auth}/kelolamenumakanan', [DaftarMakananController::class, 'adminindex']);
 Route::get('/dashboard/kelolamenumakanan/create', [DaftarMakananController::class, 'create'])->name('tambah.menu');
 Route::post('/upload-menumakanan/{id}', [DaftarMakananController::class, 'upload'])->name('upload-menumakanan');
 Route::post('/tambahMenu', [DaftarMakananController::class, 'tambah'])->name('tambah-menu.perform');

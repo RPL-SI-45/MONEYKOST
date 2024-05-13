@@ -3,9 +3,8 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Menu Makanan', 'titleSub' => 'Customer : '])
     <div class="container">
-    <!-- Card -->
     <div class="card mb-3">
-        <img src="{{ asset('storage/' . $daftar_makanan['gambar_makanan']) }}" class="card-img-top h-20" alt="...">
+        <img src="{{ asset('storage/' . $daftar_makanan['gambar_makanan']) }}" class="card-img-top h-20" alt="Gambar detail">
         <div class="card-body">
             <h5 class="card-title">{{ $daftar_makanan['nama_makanan'] }}</h5>
             <p class="card-text"><small class="text-muted">Rp. {{ $daftar_makanan['harga_makanan'] }}</small></p>

@@ -11,20 +11,20 @@ use Illuminate\Support\Facades\DB;
 
 class DaftarMakananController extends Controller
 {
-    public function index() {
-        $daftar_makanan = DaftarMakanan::all();
-        return view('pages.daftar-makanan-customer', ['daftar_makanan' => $daftar_makanan ]);
+    public function index(string $auth) {
+        if ($auth == "customer") {
+            $daftar_makanan = DaftarMakanan::all();
+            return view('pages.daftar-makanan-customer', ['daftar_makanan' => $daftar_makanan ]);
+        } else {
+            $daftar_makanan = DaftarMakanan::all();
+            return view('pages.daftar-makanan-admin', ['daftar_makanan' => $daftar_makanan ]);
+        }
     }
 
     public function show($id)
     {
         $daftar_makanan = DaftarMakanan::findOrFail($id);
         return view('pages.daftar-makanan-show', ['daftar_makanan' => $daftar_makanan]);
-    }
-
-    public function adminindex() {
-        $daftar_makanan = DaftarMakanan::all();
-        return view('pages.daftar-makanan-admin', ['daftar_makanan' => $daftar_makanan ]);
     }
 
     public function create() {
@@ -51,14 +51,12 @@ class DaftarMakananController extends Controller
             "deskripsi_makanan" => $attributes['deskripsi_makanan'],
             "gambar_makanan" => $fileName,
         ]);
-    
-        // Optionally, you may want to redirect the user after successful upload
-        return redirect("/dashboard/admin/kelolamenumakanan");
+        return redirect("/dashboard/admin/menumakanan");
     }
 
     public function destroy(int $id) {
         $data = DaftarMakanan::where('id', $id)->delete();
-        return redirect('/dashboard/admin/kelolamenumakanan');
+        return redirect('/dashboard/admin/menumakanan');
     }
 
     public function edit($id) {
@@ -86,7 +84,7 @@ class DaftarMakananController extends Controller
             "gambar_makanan" => $fileName,
         ]);
         // $daftar_makanan->update($request->except(['_token','submit']));
-        return redirect('/dashboard/admin/kelolamenumakanan');
+        return redirect('/dashboard/admin/menumakanan');
     }
 }
 
