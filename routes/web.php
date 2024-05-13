@@ -10,6 +10,7 @@ use App\Http\Controllers\{
 	PembayaranWifiController,
 	PembayaranKostController,
 	KostController,
+	DaftarMakananController
 	ListrikController,
 	PembayaranListrikController,
 	WifiController
@@ -25,9 +26,21 @@ Route::get('/dashboard/{auth}', [DashboardController::class, 'admin'])->name('da
 Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
 
 //Pembayaran wifi
-Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi')->middleware('auth');;
+Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi')->middleware('auth');
 
 //Pembayaran Listrik
+Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');
+
+//Daftar Makanan
+Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
+Route::get('/dashboard/menumakanan/{id}', [DaftarMakananController::class, 'show']);
+Route::get('/dashboard/kelolamenumakanan/create', [DaftarMakananController::class, 'create'])->name('tambah.menu');
+Route::post('/upload-menumakanan/{id}', [DaftarMakananController::class, 'upload'])->name('upload-menumakanan');
+Route::post('/tambahMenu', [DaftarMakananController::class, 'tambah'])->name('tambah-menu.perform');
+Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
+Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
+Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
+=======
 Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');;
 
 //login
@@ -74,3 +87,4 @@ Route::group(['middleware', 'auth'], function () {
 	//Logout
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
+

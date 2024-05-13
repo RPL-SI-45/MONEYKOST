@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'paket' => '10 Mbps',
             'jumlah' => '120.000',
             'status' => 'belum lunas',
+            'bukti' => '',
         ]);
 
         DB::table('pembayaran_kost')->insert([
@@ -56,13 +57,25 @@ class DatabaseSeeder extends Seeder
             'tipe_kamar' => 'AC',
             'jumlah' => '12.000.000',
             'status' => 'belum lunas',
+            'bukti' => '',
         ]);
 
         DB::table('pembayaran_kost')->insert([
             'id_customer' => 1,
             'tanggal_tagihan' => '2024-03-22',
+
             'jumlah' => '90.000',
+            'status' => 'belum',
+            'bukti' => '',
+        ]);
+
+            'id_customer' => 1,
+            'tanggal_tagihan' => '2024-03-27',
+            'berat' => '20 KG',
+            'jumlah' => '125.000',
+            'bukti' => '',
             'status' => 'belum lunas',
+            'bukti' => '',
         ]);
     }
 }
