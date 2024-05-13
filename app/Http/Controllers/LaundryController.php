@@ -28,7 +28,7 @@ class LaundryController extends Controller
         $attributes['bukti'] = '';
         $attributes['status'] = 'belum lunas';
         Pembayaran::create($attributes);
-        return redirect("/dashboard/admin");
+        return redirect('/laundry/admin/');
     }
 
     public function upload(int $id) {
@@ -36,13 +36,13 @@ class LaundryController extends Controller
             'upload-bukti' => 'required|image|mimes:jpeg,jpg,png,gif',
         ]);
         if (request()->file()) {
-            $fileName = time().'_cust.'.request()->file('upload-bukti')->extension();
+            $fileName = time().'_'.Auth::user()->username.'.'.request()->file('upload-bukti')->extension();
             $filePath = request()->file('upload-bukti')->storeAs('bukti', $fileName, 'public');
             $data = Pembayaran::where('id', $id)->update([
                 "bukti" => "bukti/" . $fileName,
                 "status" => "lunas"
             ]);
-            return redirect("/dashboard/customer");
+            return redirect("/laundry/customer");
         }
     }
 }

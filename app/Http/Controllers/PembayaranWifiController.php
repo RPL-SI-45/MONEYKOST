@@ -29,8 +29,7 @@ class PembayaranWifiController extends Controller
             // print_r($result[1]['status']);
             return view('pages.pembayaran-wifi-admin', ['data' => $result]);
         } else {
-            $user = User::where('username', 'ujang')->first();
-            $data = PembayaranWifi::where('id_customer', $user->id)->get();
+            $data = PembayaranWifi::where('id_customer', Auth::id())->get();
             $result = array();
             foreach($data as $item) {
                 $result[] = [

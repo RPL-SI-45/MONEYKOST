@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Admin', 'titleSub' => 'Admin : '])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Admin', 'titleSub' => 'Admin : '. Auth::user()->username])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -83,11 +83,6 @@
                                                     <li><a class="dropdown-item" href="{{ route('ubah-status-laundry', ['id' => $item['id_pembayaran'], 'status' => 0])}}">Belum Lunas</a></li>
                                                 </ul>
                                             </div>
-                                            <form action="/hapuslaundry/{{ $item['id_pembayaran']; }}" method = "POST">
-                                                @csrf
-                                                @method('delete')
-                                                <input type="submit" class="btn btn-danger"  value="Delete">
-                                            </form>
                                         </td>
                                     </tr>
                                     @endforeach
