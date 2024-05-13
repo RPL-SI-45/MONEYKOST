@@ -10,7 +10,7 @@ use App\Http\Controllers\{
 	PembayaranWifiController,
 	PembayaranKostController,
 	KostController,
-	DaftarMakananController
+	DaftarMakananController,
 	ListrikController,
 	PembayaranListrikController,
 	WifiController
@@ -33,15 +33,7 @@ Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::
 
 //Daftar Makanan
 Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
-Route::get('/dashboard/menumakanan/{id}', [DaftarMakananController::class, 'show']);
-Route::get('/dashboard/kelolamenumakanan/create', [DaftarMakananController::class, 'create'])->name('tambah.menu');
-Route::post('/upload-menumakanan/{id}', [DaftarMakananController::class, 'upload'])->name('upload-menumakanan');
-Route::post('/tambahMenu', [DaftarMakananController::class, 'tambah'])->name('tambah-menu.perform');
-Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
-Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
-Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
-=======
-Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');;
+
 
 //login
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -84,6 +76,16 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/tambahWifi', [WifiController::class, 'index'])->name('tambah.wifi');
 	Route::post('/tambahWifi', [WifiController::class, 'tambah'])->name('tambah-wifi.perform');
 	Route::post('/upload/{id}/wifi', [WifiController::class, 'upload'])->name('upload-bukti-wifi');
+
+	//Daftar Makanan
+	Route::get('/dashboard/menumakanan/{id}', [DaftarMakananController::class, 'show']);
+	Route::get('/dashboard/kelolamenumakanan/create', [DaftarMakananController::class, 'create'])->name('tambah.menu');
+	Route::post('/upload-menumakanan/{id}', [DaftarMakananController::class, 'upload'])->name('upload-menumakanan');
+	Route::post('/tambahMenu', [DaftarMakananController::class, 'tambah'])->name('tambah-menu.perform');
+	Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
+	Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
+	Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
+
 	//Logout
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
