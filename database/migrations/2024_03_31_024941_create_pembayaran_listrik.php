@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tanggaltagihan');
             $table->integer('jumlah');
             $table->integer('kwh');
-            $table->string('bukti');
+            $table->string('bukti')->nullable();
             $table->enum('status', ['lunas', 'belum']);
             $table->timestamps();
         });
