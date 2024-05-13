@@ -17,8 +17,8 @@ return new class extends Migration
             $table->date('tanggal_tagihan');
             $table->string('berat');
             $table->string('jumlah');
-            $table->string('bukti');
-            $table->string('status');
+            $table->string('bukti')->nullable();
+            $table->string('status')->nullable();
         });
     }
 

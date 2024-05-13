@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_customer');
             $table->date('tanggal_tagihan');
-            $table->string('tipe_kamar');
+            $table->string('tipe_kamar')->nullable();
             $table->string('jumlah');
-            $table->string('bukti');
-            $table->string('status');
+            $table->string('bukti')->nullable();
+            $table->string('status')->nullable();
         });
     }
 

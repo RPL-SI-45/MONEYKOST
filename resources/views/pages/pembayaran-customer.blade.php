@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Customer', 'titleSub' => 'Customer : '])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Pembayaran Laundry Customer', 'titleSub' => 'Customer : ' . Auth::user()->username])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -65,7 +65,7 @@
                                                                     <p class="mb-0">Tolong upload bukti pembayaran anda !</p>
                                                                 </div>
                                                             <div class="card-body">
-                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti-laundry', ['id' => $item['id']]) }}" enctype="multipart/form-data">
+                                                                <form role="form text-left" role="form" method="POST" action="{{ route('upload-bukti', ['id' => $item['id']]) }}" enctype="multipart/form-data">
                                                                     @csrf
                                                                     @method('post')
                                                                     <div class="input-group mb-3">

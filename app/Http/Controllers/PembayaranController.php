@@ -3,46 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Pembayaran;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class PembayaranController extends Controller
 {
     public function index(string $auth) {
-        if ($auth == "admin") {
-            $data = Pembayaran::all();
-            $result = array();
-            foreach($data as $item) {
-                $nama = User::select('username')->where('id', $item->id_customer)->first()->username;
-                $result[] = [
-                    'nama_cust' => $nama,
-                    'id_pembayaran' => $item->id,
-                    'tanggal_tagihan' => $item->tanggal_tagihan,
-                    'berat' => $item->berat,
-                    'jumlah' => 'RP. ' . $item->jumlah,
-                    'status' => $item->status,
-                    'bukti' => $item->bukti,
-                ];
+        if (Auth::check()) {
+            if ($auth == "admin") {
+                $data = Pembayaran::all();
+                $result = array();
+                foreach($data as $item) {
+                    $nama = User::select('username')->where('id', $item->id_customer)->first()->username;
+                    $result[] = [
+                        'nama_cust' => $nama,
+                        'id_pembayaran' => $item->id,
+                        'tanggal_tagihan' => $item->tanggal_tagihan,
+                        'berat' => $item->berat,
+                        'jumlah' => 'RP. ' . $item->jumlah,
+                        'status' => $item->status,
+                        'bukti' => $item->bukti,
+                    ];
+                }
+                return view('pages.pembayaran-admin', ['data' => $result]);
+            } else {
+                $data = Pembayaran::where('id_customer', Auth::id())->get();
+                $result = array();
+                foreach($data as $item) {
+                    $result[] = [
+                        'id' => $item->id,
+                        'tanggal_tagihan' => $item->tanggal_tagihan,
+                        'berat' => $item->berat,
+                        'jumlah' => 'RP. ' . $item->jumlah,
+                        'status' => $item->status,
+                        'bukti' => $item->bukti,
+                    ];
+                }
+                return view('pages.pembayaran-customer', ['data' => $result]);
             }
-            // print_r($result[1]['status']);
-            return view('pages.pembayaran-admin', ['data' => $result]);
         } else {
-            $user = User::where('username', 'ujang')->first();
-            $data = Pembayaran::where('id_customer', $user->id)->get();
-            $result = array();
-            foreach($data as $item) {
-                $result[] = [
-                    'id' => $item->id,
-                    'tanggal_tagihan' => $item->tanggal_tagihan,
-                    'berat' => $item->berat,
-                    'jumlah' => 'RP. ' . $item->jumlah,
-                    'status' => $item->status,
-                    'bukti' => $item->bukti,
-                ];
-            }
-            return view('pages.pembayaran-customer', ['data' => $result]);
+            return redirect("/login");
         }
     }
 
@@ -50,11 +52,6 @@ class PembayaranController extends Controller
         $data = Pembayaran::where('id', $id)->update([
             "status" => $status == 0 ? 'belum lunas' : 'lunas'
         ]);
-        return redirect('/dashboard/admin');
+        return redirect('/laundry/admin');
     }
-
-    public function destroy(int $id) {
-        $data = Pembayaran::where('id', $id)->delete();
-        return redirect('/dashboard/admin');
-    } 
 }
