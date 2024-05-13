@@ -29,8 +29,7 @@ class PembayaranListrikController extends Controller
             // print_r($result[1]['status']);
             return view('pages.listrik-admin', ['data' => $result]);
         } else {
-            $user = User::where('username', 'ujang')->first();
-            $data = Pembayaranlistrik::where('id_customer', $user->id)->get();
+            $data = Pembayaranlistrik::where('id_customer', Auth::id())->get();
             $result = array();
             foreach($data as $item) {
                 $result[] = [
@@ -48,7 +47,7 @@ class PembayaranListrikController extends Controller
 
     public function ubah(int $id, int $status) {
         $data = Pembayaranlistrik::where('id', $id)->update([
-            "status" => $status == 0 ? 'belum lunas' : 'lunas'
+            "status" => $status == 0 ? 'belum' : 'lunas'
         ]);
         return redirect('/dashboard/admin/pembayaranlistrik');
     }

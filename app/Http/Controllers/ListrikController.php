@@ -26,7 +26,7 @@ class ListrikController extends Controller
         ]);
         $attributes['jumlah'] = number_format($attributes['jumlah'], 0, ',', '.');
         $attributes['bukti'] = '';
-        $attributes['status'] = 'belum lunas';
+        $attributes['status'] = 'belum';
         Pembayaranlistrik::create($attributes);
         return redirect("/dashboard/admin/pembayaranlistrik");
     }

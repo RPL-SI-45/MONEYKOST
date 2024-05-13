@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pembayaran_listrik', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_customer');
             $table->date('tanggaltagihan');
             $table->integer('jumlah');
             $table->integer('kwh');
