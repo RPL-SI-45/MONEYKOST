@@ -13,7 +13,8 @@ use App\Http\Controllers\{
 	DaftarMakananController,
 	ListrikController,
 	PembayaranListrikController,
-	WifiController
+	WifiController,
+	SearchFilter
 }; 
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
@@ -33,6 +34,7 @@ Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::
 
 //Daftar Makanan
 Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
+Route::get('/dashboard/customer/menumakanan/search', [SearchFilter::class, 'cari'])->name('searchmakanan');
 
 
 //login
@@ -85,6 +87,7 @@ Route::group(['middleware', 'auth'], function () {
 	Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
 	Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
 	Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
+
 
 	//Logout
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
