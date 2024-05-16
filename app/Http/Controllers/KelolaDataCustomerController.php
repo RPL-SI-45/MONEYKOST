@@ -11,4 +11,8 @@ class KelolaDataCustomerController extends Controller
         $kelola_data_customer = User::all();
         return view('pages.kelola-data-customer', ['kelola_data_customer' => $kelola_data_customer]);
     }
+    public function destroy(int $id) {
+        $item = User::where('id', $id)->delete();
+        return redirect('/dashboard/admin/kelolaDataCustomer');
+    }
 }

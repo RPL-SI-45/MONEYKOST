@@ -51,7 +51,7 @@ Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('
 
 // Kelola Data Customer
 Route::get('dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
-
+Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
 
 Route::group(['middleware', 'auth'], function () {
 	//Laundry
