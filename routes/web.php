@@ -11,10 +11,13 @@ use App\Http\Controllers\{
 	PembayaranKostController,
 	KostController,
 	DaftarMakananController,
-	ListrikController,
+    KelolaDataCustomerController,
+    ListrikController,
 	PembayaranListrikController,
-	WifiController
+	WifiController,
 }; 
+use Illuminate\Support\Facades\Route;
+
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 
@@ -44,6 +47,11 @@ Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest
 Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+
+
+// Kelola Data Customer
+Route::get('dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
+Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
 
 Route::group(['middleware', 'auth'], function () {
 	//Laundry
@@ -88,5 +96,7 @@ Route::group(['middleware', 'auth'], function () {
 
 	//Logout
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
 });
 
