@@ -29,7 +29,6 @@ class PembayaranKostController extends Controller
             // print_r($result[1]['status']);
             return view('pages.pembayaran-kost-admin', ['data' => $result]);
         } else {
-            $user = User::where('username', 'ujang')->first();
             $data = PembayaranKost::where('id_customer', Auth::id())->get();
             $result = array();
             foreach($data as $item) {
