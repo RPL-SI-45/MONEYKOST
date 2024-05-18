@@ -23,7 +23,7 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name
 
 // Pembayaran Laundry            
 Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
-Route::get('/dashboard/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
+Route::get('/dashboardmain/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
 
 //Pembayaran Kost
 Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
