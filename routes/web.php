@@ -15,8 +15,13 @@ use App\Http\Controllers\{
     ListrikController,
 	PembayaranListrikController,
 	WifiController,
+	ProfileController
 }; 
 use Illuminate\Support\Facades\Route;
+
+//profile
+Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile');
+Route::put('/update-profile', [ProfileController::class, 'update'])->name('update-profile');
 
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
