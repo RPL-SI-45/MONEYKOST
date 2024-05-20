@@ -1,7 +1,8 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Menu Makanan', 'titleSub' => 'Customer : '])
+
+    @include('layouts.navbars.auth.topnav', ['title' => 'Menu Makanan', 'titleSub' => 'Customer : ' . Auth::user()->username])
     <style type="text/css">
 		.pagination li{
 			float: left;
@@ -9,6 +10,9 @@
 			margin:5px;
 		}
 	</style>
+
+
+
     <div class="container">
         <form class="" action="{{ route('searchmakanan') }}" method="GET">
             <input type="text" name="cari" placeholder="Cari Makanan .." value="{{ old('cari') }}">

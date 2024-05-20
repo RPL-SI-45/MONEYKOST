@@ -11,11 +11,20 @@ use App\Http\Controllers\{
 	PembayaranKostController,
 	KostController,
 	DaftarMakananController,
-	ListrikController,
+    KelolaDataCustomerController,
+    ListrikController,
 	PembayaranListrikController,
 	WifiController,
-	SearchFilter
+	SearchFilter,
+	ProfileController
+
 }; 
+use Illuminate\Support\Facades\Route;
+
+//profile
+Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile');
+Route::put('/update-profile', [ProfileController::class, 'update'])->name('update-profile');
+
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/test',[DashboardController::class, 'test']);
@@ -23,7 +32,7 @@ Route::get('/test2',[DashboardController::class, 'test2']);
 
 // Pembayaran Laundry            
 Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
-Route::get('/dashboard/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
+Route::get('/dashboardmain/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
 
 //Pembayaran Kost
 Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
@@ -48,6 +57,11 @@ Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest
 Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('guest')->name('reset.perform');
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
+
+
+// Kelola Data Customer
+Route::get('dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
+Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
 
 Route::group(['middleware', 'auth'], function () {
 	//Laundry
@@ -93,5 +107,7 @@ Route::group(['middleware', 'auth'], function () {
 
 	//Logout
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
 });
 

@@ -63,19 +63,10 @@ class DatabaseSeeder extends Seeder
         DB::table('pembayaran_kost')->insert([
             'id_customer' => 1,
             'tanggal_tagihan' => '2024-03-22',
-
             'jumlah' => '90.000',
             'status' => 'belum',
             'bukti' => '',
         ]);
 
-            'id_customer' => 1,
-            'tanggal_tagihan' => '2024-03-27',
-            'berat' => '20 KG',
-            'jumlah' => '125.000',
-            'bukti' => '',
-            'status' => 'belum lunas',
-            'bukti' => '',
-        ]);
     }
 }
