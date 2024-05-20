@@ -18,6 +18,8 @@ use App\Http\Controllers\{
 }; 
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/test',[DashboardController::class, 'test']);
+Route::get('/test2',[DashboardController::class, 'test2']);
 
 // Pembayaran Laundry            
 Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
