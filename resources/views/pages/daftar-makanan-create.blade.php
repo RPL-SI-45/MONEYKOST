@@ -6,24 +6,24 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
-                        <h6>Tambah Menu Makanan</h6>
+                        <h6>Tambah Menu </h6>
                     </div>
                     <div class="card-body">
                         <form role="form" method="POST" action="{{ route('tambah-menu.perform') }}" enctype="multipart/form-data">
                             @csrf
                             @method('post')
                             <div class="form-group">
-                                <label for="namaMakananInput" class="form-control-label">Nama Makanan</label>
+                                <label for="namaMakananInput" class="form-control-label">Nama Menu</label>
                                 <input class="form-control" type="text" id="namaMakananInput" name="nama_makanan">
                                 @error('nama_makanan') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="hargaMakananInput" class="form-control-label">Harga Makanan</label>
+                                <label for="hargaMakananInput" class="form-control-label">Harga Menu</label>
                                 <input class="form-control" type="number" id="hargaMakananInput" name="harga_makanan">
                                 @error('harga_makanan') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="tipeMakananInput" class="form-control-label">Tipe</label>
+                                <label for="tipeMakananInput" class="form-control-label">kategori</label>
                                 <select class="form-control" name="tipe_makanan">
                                     <option selected></option>
                                     <option value="Makanan">Makanan</option>
@@ -32,7 +32,7 @@
                                 @error('tipe_makanan') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
-                                <label for="deskripsiMakananInput" class="form-control-label">Deskripsi Makanan</label>
+                                <label for="deskripsiMakananInput" class="form-control-label">Deskripsi Menu</label>
                                 <textarea class="form-control" type="text" id="deskripsiMakananInput" name="deskripsi_makanan"></textarea>
                                 @error('deskripsi_makanan') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>

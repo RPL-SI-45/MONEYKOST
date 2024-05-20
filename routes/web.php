@@ -15,7 +15,9 @@ use App\Http\Controllers\{
     ListrikController,
 	PembayaranListrikController,
 	WifiController,
+	SearchFilter,
 	ProfileController
+
 }; 
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +27,8 @@ Route::put('/update-profile', [ProfileController::class, 'update'])->name('updat
 
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
+Route::get('/test',[DashboardController::class, 'test']);
+Route::get('/test2',[DashboardController::class, 'test2']);
 
 // Pembayaran Laundry            
 Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
@@ -41,6 +45,7 @@ Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::
 
 //Daftar Makanan
 Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
+Route::get('/dashboard/customer/menumakanan/search', [SearchFilter::class, 'cari'])->name('searchmakanan');
 
 
 //login
@@ -98,6 +103,7 @@ Route::group(['middleware', 'auth'], function () {
 	Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
 	Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
 	Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
+
 
 	//Logout
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
