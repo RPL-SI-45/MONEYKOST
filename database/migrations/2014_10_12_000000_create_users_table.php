@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('auth');
             $table->unsignedBigInteger('no_kamar')->nullable();
             $table->string('no_hp')->nullable();
+            $table->string('name')->nullable();
             $table->rememberToken();
         });
     }
