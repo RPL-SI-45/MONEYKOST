@@ -40,7 +40,7 @@
                 <div class="col-lg-3 col-md-4 col-sm-6">
                     <div class="shadow-full p-0 m-2 border-gray-100">
                         <div class="card rounded" style="width: 18rem">
-                            <a href="../menumakanan/{{$data['id']}}">
+                            <a href="/dashboard/menumakanan/{{$data['id']}}">
                                 <img class="card-img-top" style="height: 12rem;" src="{{ asset('storage/' . $data['gambar_makanan']) }}" alt="makanan">
                                 <div class="card-body">
                                     <h5 class="card-title">{{$data['nama_makanan']}}</h5>
