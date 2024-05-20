@@ -4,30 +4,37 @@
 
     @include('layouts.navbars.auth.topnav', ['title' => 'Menu Makanan', 'titleSub' => 'Customer : ' . Auth::user()->username])
     <style type="text/css">
-		.pagination li{
-			float: left;
-			list-style-type: none;
-			margin:5px;
-		}
-	</style>
+        .search-form {
+            position: relative;
+            z-index: 10; 
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
 
-
+    </style>
 
     <div class="container">
-        <form class="" action="{{ route('searchmakanan') }}" method="GET">
-            <input type="text" name="cari" placeholder="Cari Makanan .." value="{{ old('cari') }}">
-            <input type="submit" value="CARI">
-            <div class="col-md-4">
-                    <select name="kategori" class="form-control">
-                        <option disabled selected value>Semua Kategori</option>
-                        <option value="makanan" {{ request('kategori') == 'Makanan Utama' ? 'selected' : '' }}>Makanan</option>
-                        <option value="minuman" {{ request('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
-                        <!-- Tambahkan kategori lain sesuai kebutuhan -->
-                    </select>
-            </div>
-        </form>
+    <form class="search-form" action="{{ route('searchmakanan') }}" method="GET">
+    <div class="row align-items-center"> <!-- Changed from form-row to row -->
+        <div class="col-sm-2 mb-2">
+            <input class="form-control" type="text" name="cari" placeholder="Cari Makanan .." value="{{ old('cari') }}">
+        </div>
+        <div class="form-group col-sm-2 mb-1">
+            <select name="kategori" class="form-control">
+                <option disabled selected value>Semua Kategori</option>
+                <option value="makanan" {{ request('kategori') == 'Makanan Utama' ? 'selected' : '' }}>Makanan</option>
+                <option value="minuman" {{ request('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
+            </select>
+        </div>
+        <div class="col-md-1 "> 
+            <input type="submit" value="Cari" class="btn btn-warning btn-rounded mt-0 mb-0">
+        </div>
+    </div>
+</form>
 
-            
+
+
         <div class="row">
             @foreach($daftar_makanan as $data)
                 <div class="col-lg-3 col-md-4 col-sm-6">

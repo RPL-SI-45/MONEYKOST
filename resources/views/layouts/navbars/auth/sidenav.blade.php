@@ -14,7 +14,7 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 @if(Auth::user()->auth == "admin")
-                    <a class="nav-link {{ str_contains(request()->url(), 'dashboard') == true ? 'active' : '' }}" href="{{route('dashboard', ['auth' => 'admin']) }}">
+                    <a class="nav-link {{ str_contains(request()->url(), 'dashboardmain') == true ? 'active' : '' }}" href="{{route('dashboard', ['auth' => 'admin']) }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-chart-pie-35 text-info text-sm opacity-10"></i>
@@ -22,7 +22,7 @@
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                 @else(Auth::user()->auth == "customer")
-                    <a class="nav-link {{ str_contains(request()->url(), 'dashboard') == true ? 'active' : '' }}" href="{{route('dashboard', ['auth' => 'customer']) }}">
+                    <a class="nav-link {{ str_contains(request()->url(), 'dashboardmain') == true ? 'active' : '' }}" href="{{route('dashboard', ['auth' => 'customer']) }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-chart-pie-35 text-info text-sm opacity-10"></i>
