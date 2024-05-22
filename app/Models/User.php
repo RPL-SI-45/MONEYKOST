@@ -27,7 +27,9 @@ class User extends Authenticatable
         'password',
         'auth',
         'no_kamar',
-        'no_hp'
+        'no_hp',
+        'gambar_profile',
+        'name'
     ];
 
     /**

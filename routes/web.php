@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 //profile
 Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile');
-Route::put('/update-profile', [ProfileController::class, 'update'])->name('update-profile');
+Route::put('/update-profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
 
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');

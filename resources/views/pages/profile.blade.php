@@ -10,7 +10,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-8 text-center">
                                 <div class="profile-img mt-3 mb-3 mx-auto">
-                                    <img src="https://png.pngtree.com/png-clipart/20200701/original/pngtree-online-shopping-with-clicking-option-design-png-image_5345679.jpg" width="100" height="100" alt="Profile Picture" class="rounded-circle img-fluid">
+                                    <img src="{{ asset('storage/' . $user['gambar_profile']) }}" width="100" height="100" alt="Profile Picture" class="rounded-circle img-fluid">
                                     {{-- <span class="edit-icon">
                                         <img src="path/to/edit-icon.png" alt="Edit Icon" width="20">
                                     </span> --}}
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="container px-5 mb-4">
-                        <form method="POST" action="/update-profile">
+                        <form action="{{ route('profile.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -49,7 +49,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="phone">No. Handphone</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="no_hp" name="phone" value="{{$user->no_hp}}"> 
+                                        <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{$user->no_hp}}"> 
                                         {{-- <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <img src="path/to/edit-icon.png" alt="Edit Icon" width="20">
@@ -69,9 +69,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="room">No. Kamar</label>
+                                    <label for="no_kamar">No. Kamar</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="room" name="no_kamar" value="{{$user->no_kamar}}">
+                                        <input type="text" class="form-control" id="no_kamar" name="no_kamar" value="{{$user->no_kamar}}">
                                         {{-- <div class="input-group-append">
                                             <span class="input-group-text">
                                                 <img src="path/to/edit-icon.png" alt="Edit Icon" width="20">
@@ -80,6 +80,10 @@
                                     </div>
                                 </div>
                             </div>
+                            </div>
+                            <input class="form-control" type="file" id="gambar_profileInput" name="gambar_profile">
+                                @error('gambar_profile') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                            <div class="form-group">
                             <div class="row justify-content-center">
                                 <div class="col-md-4 text-center">
                                     <button type="submit" class="btn btn-primary">Update Profile</button>
