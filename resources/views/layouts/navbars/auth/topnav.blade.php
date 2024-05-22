@@ -21,7 +21,7 @@
                 <li class="nav-item">
                     <a href="{{ route('profile') }}" class="nav-link p-0">
                         <div class="rounded-circle overflow-hidden d-flex align-items-center" style="width: 36px; height: 36px; background-color: #ffffff;">
-                            <img src="path/to/profile-picture.jpg" alt="Profile Picture" class="img-fluid" style="width: 100%; height: auto;">
+                            <img src="{{ asset('storage/' . $user->gambar_profile) }}" alt="Profile Picture" class="img-fluid" style="width: 100%; height: auto;">
                         </div>
                     </a>
                 </li>                
