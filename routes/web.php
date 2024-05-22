@@ -28,7 +28,7 @@ Route::put('/update-profile', [ProfileController::class, 'update'])->name('updat
 //Index
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 Route::get('/test',[DashboardController::class, 'test']);
-Route::get('/test2',[DashboardController::class, 'test2']);
+Route::get('/dashboardcustomer/{auth}',[DashboardController::class, 'test2'])->middleware('auth')->name('dashboard_customer');
 
 // Pembayaran Laundry            
 Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
