@@ -70,21 +70,29 @@ class DaftarMakananController extends Controller
             'harga_makanan' => 'required',
             'tipe_makanan' => 'required',
             'deskripsi_makanan' => 'required',
-            'gambar_makanan' => 'required|image|mimes:jpeg,jpg,png,gif',
+            'gambar_makanan' => 'sometimes|image|mimes:jpeg,jpg,png,gif',
         ]);
+    
         $daftar_makanan = DaftarMakanan::find($id);
-        $file = $request->file('gambar_makanan');
-        $fileName = $file->getClientOriginalName();
-        $filePath = $file->storeAs('public', $fileName);
-        $data = DaftarMakanan::where('id', $id)->update([
-            "nama_makanan" => $attributes['nama_makanan'],
-            "harga_makanan" => $attributes['harga_makanan'],
-            "tipe_makanan" => $attributes['tipe_makanan'],
-            "deskripsi_makanan" => $attributes['deskripsi_makanan'],
-            "gambar_makanan" => $fileName,
-        ]);
-        // $daftar_makanan->update($request->except(['_token','submit']));
+    
+        if ($request->hasFile('gambar_makanan')) {
+            $file = $request->file('gambar_makanan');
+            $fileName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('public', $fileName);
+    
+            $daftar_makanan->update([
+                "nama_makanan" => $attributes['nama_makanan'],
+                "harga_makanan" => $attributes['harga_makanan'],
+                "tipe_makanan" => $attributes['tipe_makanan'],
+                "deskripsi_makanan" => $attributes['deskripsi_makanan'],
+                "gambar_makanan" => $fileName,
+            ]);
+        } else {
+            $daftar_makanan->update($request->except(['_token', 'submit', 'gambar_makanan']));
+        }
+    
         return redirect('/dashboard/admin/menumakanan');
     }
+    
 }
 
