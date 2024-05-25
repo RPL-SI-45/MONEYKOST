@@ -35,7 +35,7 @@ class PembayaranKostController extends Controller
                 $result[] = [
                     'id' => $item->id,
                     'tanggal_tagihan' => $item->tanggal_tagihan,
-                    'tipe_kamar' => $item->berat,
+                    'tipe_kamar' => $item->tipe_kamar,
                     'jumlah' => 'RP. ' . $item->jumlah,
                     'status' => $item->status,
                     'bukti' => $item->bukti,

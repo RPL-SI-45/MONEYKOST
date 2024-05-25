@@ -16,36 +16,12 @@ use App\Http\Controllers\{
 	PembayaranListrikController,
 	WifiController,
 	SearchFilter,
-	ProfileController
+	ProfileController,
+	CartController
 
 }; 
 use Illuminate\Support\Facades\Route;
 
-//profile
-Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile');
-Route::put('/update-profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
-
-//Index
-Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/test',[DashboardController::class, 'test']);
-Route::get('/dashboardcustomer/{auth}',[DashboardController::class, 'test2'])->middleware('auth')->name('dashboard_customer');
-
-// Pembayaran Laundry            
-Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
-Route::get('/dashboardmain/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
-
-//Pembayaran Kost
-Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
-
-//Pembayaran wifi
-Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi')->middleware('auth');
-
-//Pembayaran Listrik
-Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');
-
-//Daftar Makanan
-Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
-Route::get('/dashboard/customer/menumakanan/search', [SearchFilter::class, 'cari'])->name('searchmakanan');
 
 
 //login
@@ -58,10 +34,9 @@ Route::post('/reset-password', [ResetPassword::class, 'send'])->middleware('gues
 Route::get('/change-password', [ChangePassword::class, 'show'])->middleware('guest')->name('change-password');
 Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 
+//Logout
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-// Kelola Data Customer
-Route::get('dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
-Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
 
 Route::group(['middleware', 'auth'], function () {
 	//Laundry
@@ -103,11 +78,42 @@ Route::group(['middleware', 'auth'], function () {
 	Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
 	Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
 	Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
+	//Daftar Makanan
+	Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
+	Route::get('/dashboard/customer/menumakanan/search', [SearchFilter::class, 'cari'])->name('searchmakanan');
+
+	//profile
+	Route::get('/dashboard/profile', [ProfileController::class, 'index'])->name('profile');
+	Route::put('/update-profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+
+	//Index
+	Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
+	Route::get('/test',[DashboardController::class, 'test']);
+	Route::get('/dashboardcustomer/{auth}',[DashboardController::class, 'test2'])->middleware('auth')->name('dashboard_customer');
+
+	// Pembayaran Laundry            
+	Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
+	Route::get('/dashboardmain/{auth}', [DashboardController::class, 'admin'])->name('dashboard')->middleware('auth');
+
+	//Pembayaran Kost
+	Route::get('/dashboard/{auth}/pembayarankost', [PembayaranKostController::class, 'index'])->name('pembayarankost')->middleware('auth');
+
+	//Pembayaran wifi
+	Route::get('/dashboard/{auth}/pembayaranwifi', [PembayaranWifiController::class, 'index'])->name('pembayaranwifi')->middleware('auth');
+
+	//Pembayaran Listrik
+	Route::get('/dashboard/{auth}/pembayaranlistrik', [PembayaranListrikController::class, 'index'])->name('pembayaranlistrik')->middleware('auth');
+
+	
+	// Kelola Data Customer
+	Route::get('/dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
+	Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
+
+	// Routes/web.php
 
 
-	//Logout
-	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
+	Route::get('/dashboard/{auth}/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
+	Route::post('/addToCart/{id}/perform', [CartController::class, 'addToCart'])->name('add-cart.perform')->middleware('auth');
 
 });
 
