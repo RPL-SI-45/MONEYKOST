@@ -21,7 +21,7 @@ class CartController extends Controller
                     'id' => $item->id,
                     'id_makanan' => $item->id_makanan,
                     'nama_makanan' => $item->nama_makanan,
-                    'harga_makanan' => 'RP. ' . number_format($item->harga_makanan, 0, ',', '.'),
+                    'harga_makanan' => $item->harga_makanan,
                     'gambar_makanan' => $item->gambar_makanan,
                     'qty' => $item->qty,
                 ];
@@ -29,27 +29,34 @@ class CartController extends Controller
             return view('pages.cart', ['data' => $result]);
     }
 
-    public function addToCart($id,Request $request){
-    $attributes = $request->validate([
-        // 'nama_makanan' => 'required',
-        // 'harga_makanan' => 'required',
-        // 'tipe_makanan' => 'required',
-        // 'deskripsi_makanan' => 'required',
-        // 'gambar_makanan' => 'required',
-        'qty' => 'required|integer|min:1',
-    ]);
-    $daftar_makanan = DaftarMakanan::findOrFail($id);
-    Cart::create([
-        'id_customer' => Auth::id(),
-        'id_makanan' => $daftar_makanan->id,
-        'nama_makanan' => $daftar_makanan->nama_makanan,
-        'harga_makanan' => $daftar_makanan->harga_makanan,
-        'gambar_makanan' => $daftar_makanan->gambar_makanan,
-        'qty' => $attributes['qty'],
-    ]);
-    return redirect("/dashboard/customer/cart");
-
-}
+    public function addToCart($id, Request $request){
+        $attributes = $request->validate([
+            'qty' => 'required|integer|min:1',
+        ]);
+        
+        $daftar_makanan = DaftarMakanan::findOrFail($id);
+        $cartItem = Cart::where('id_customer', Auth::id())
+                        ->where('nama_makanan', $daftar_makanan->nama_makanan)
+                        ->first();
+    
+        if ($cartItem) {
+            // If item exists in cart, update its quantity
+            $cartItem->update(['qty' => $cartItem->qty + $attributes['qty']]);
+        } else {
+            // If item doesn't exist in cart, create a new entry
+            Cart::create([
+                'id_customer' => Auth::id(),
+                'id_makanan' => $daftar_makanan->id,
+                'nama_makanan' => $daftar_makanan->nama_makanan,
+                'harga_makanan' => $daftar_makanan->harga_makanan,
+                'gambar_makanan' => $daftar_makanan->gambar_makanan,
+                'qty' => $attributes['qty'],
+            ]);
+        }
+        
+        return redirect("/dashboard/customer/cart");
+    }
+    
    
   
 }
