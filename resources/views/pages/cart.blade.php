@@ -19,7 +19,7 @@
                   @php
                     $total = $item['harga_makanan'] * $item['qty'];
                   @endphp
-                  <p class="card-text mb-0">Total: Rp. {{ number_format($total, 0, ',', '.') }}</p>
+                  <p class="card-text mb-0">Total: Rp. {{ number_format($total, 0, ',', '.') }}.000</p>
                   <form action="/hapuscart/{{ $item['id'] }}" method="POST">
                     @csrf
                     @method('delete')

@@ -78,40 +78,51 @@ class CartController extends Controller
         return redirect("/dashboard/customer/pembayaranmakanan");
     }
 
-    public function pembayaranview(string $auth){
-        $data = PembayaranMakanan::where('id_customer', Auth::id())->get()->first(); // Retrieve the first item
-
+    public function pembayaranview(string $auth) {
+        $data = PembayaranMakanan::where('id_customer', Auth::id())
+                        ->latest() 
+                        ->first(); 
+    
         if ($data) {
             return view('pages.pembayaran-makanan', ['data' => $data]);
         } else {
 
         }
     }
+    
 
     public function uploadbukti($id, Request $request) {
         $attributes = $request->validate([
             'bukti' => 'sometimes|image|mimes:jpeg,jpg,png,gif',
         ]);
     
-        $pembayaran_makanan = PembayaranMakanan::find($id);
-        
+        $user = auth()->user();
+    
+        $pembayaran_makanan = PembayaranMakanan::where('id_customer', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+    
+        if (!$pembayaran_makanan) {
+            return redirect()->back()->withErrors(['message' => 'PembayaranMakanan record not found for this user.']);
+        }
+    
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
             $fileName = time() . '_' . $file->getClientOriginalName(); 
             $filePath = $file->storeAs('public', $fileName);
     
             $pembayaran_makanan->update([
-                "bukti" => $fileName,
+                'bukti' => $fileName,
             ]);
         } else {
             $pembayaran_makanan->update($request->except(['_token', 'submit', 'bukti']));
         }
     
-        $cartItems = Cart::where('id_customer', auth()->id())->get(); 
-        $user = auth()->user(); 
+        $cartItems = Cart::where('id_customer', $user->id)->get();
+    
         foreach ($cartItems as $item) {
             Order::create([
-                'id_customer' => auth()->id(),
+                'id_customer' => $user->id,
                 'nama_makanan' => $item->nama_makanan,
                 'nama_customer' => $user->username,
                 'kamar' => $user->no_kamar,
@@ -122,8 +133,10 @@ class CartController extends Controller
             $item->delete();
         }
     
+        // Step 7: Redirect to the desired page
         return redirect('/dashboard/customer/terimakasih')->with('success', 'Order has been created successfully.');
     }
+    
     
     public function terimakasih() {
         return view('pages.terimakasih');
