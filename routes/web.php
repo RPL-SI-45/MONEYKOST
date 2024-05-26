@@ -78,7 +78,6 @@ Route::group(['middleware', 'auth'], function () {
 	Route::delete('/hapusmenu/{id}', [DaftarMakananController::class, 'destroy'])->name('delete-menumakanan');
 	Route::get('/editmenu/{id}', [DaftarMakananController::class, 'edit']);
 	Route::put('/editmenu/{id}/perform', [DaftarMakananController::class, 'update'])->name('edit-menu.perform');
-	//Daftar Makanan
 	Route::get('/dashboard/{auth}/menumakanan', [DaftarMakananController::class, 'index'])->name('menumakanan');
 	Route::get('/dashboard/customer/menumakanan/search', [SearchFilter::class, 'cari'])->name('searchmakanan');
 
@@ -114,6 +113,8 @@ Route::group(['middleware', 'auth'], function () {
 
 	Route::get('/dashboard/{auth}/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 	Route::post('/addToCart/{id}/perform', [CartController::class, 'addToCart'])->name('add-cart.perform')->middleware('auth');
-
+	Route::delete('/hapuscart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
+	Route::post('/bayar', [CartController::class, 'bayar'])->name('bayar-cart');
+	Route::get('/dashboard/{auth}/pembayaranmakanan', [CartController::class, 'pembayaran']);
 });
 

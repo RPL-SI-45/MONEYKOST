@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
 use App\Models\DaftarMakanan;
+use App\Models\PembayaranMakanan;
 
 class CartController extends Controller
 {
@@ -40,10 +41,8 @@ class CartController extends Controller
                         ->first();
     
         if ($cartItem) {
-            // If item exists in cart, update its quantity
             $cartItem->update(['qty' => $cartItem->qty + $attributes['qty']]);
         } else {
-            // If item doesn't exist in cart, create a new entry
             Cart::create([
                 'id_customer' => Auth::id(),
                 'id_makanan' => $daftar_makanan->id,
@@ -57,6 +56,40 @@ class CartController extends Controller
         return redirect("/dashboard/customer/cart");
     }
     
-   
+    public function destroy(int $id) {
+        $data = Cart::where('id', $id)->delete();
+        return redirect('/dashboard/customer/cart');
+    }
+
+    public function bayar(Request $request) {
+        $attributes = $request->validate([
+            'grandTotal' => 'required',
+        ]);
+        
+
+        PembayaranMakanan::create([
+            'id_customer' => Auth::id(),
+            'grandTotal' => $attributes['grandTotal'],
+        ]);
+        Cart::where('id_customer', Auth::id())->delete();
+
+        
+        return redirect("/dashboard/customer/pembayaranmakanan");
+    }
+
+    public function pembayaran(string $auth)
+    {
+        $data = PembayaranMakanan::where('id_customer', Auth::id())->get();
+            $result = array();
+            foreach($data as $item) {
+                $result[] = [
+                    'id' => $item->id,
+                    'grandTotal' => $item->grandTotal,
+                    'bukti' => $item->bukti,
+                    'status' => $item->status,
+                ];
+            }
+            return view('pages.pembayaran-makanan', ['data' => $result]);
+    }
   
 }
