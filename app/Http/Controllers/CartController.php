@@ -10,6 +10,7 @@ use App\Models\Cart;
 use Illuminate\Support\Facades\DB;
 use App\Models\DaftarMakanan;
 use App\Models\PembayaranMakanan;
+use App\Models\Order;
 
 class CartController extends Controller
 {
@@ -93,10 +94,10 @@ class CartController extends Controller
         ]);
     
         $pembayaran_makanan = PembayaranMakanan::find($id);
-    
+        
         if ($request->hasFile('bukti')) {
             $file = $request->file('bukti');
-            $fileName = $file->getClientOriginalName();
+            $fileName = time() . '_' . $file->getClientOriginalName(); 
             $filePath = $file->storeAs('public', $fileName);
     
             $pembayaran_makanan->update([
@@ -106,7 +107,26 @@ class CartController extends Controller
             $pembayaran_makanan->update($request->except(['_token', 'submit', 'bukti']));
         }
     
-        return redirect('/dashboard/admin/menumakanan');
+        $cartItems = Cart::where('id_customer', auth()->id())->get(); 
+        $user = auth()->user(); 
+        foreach ($cartItems as $item) {
+            Order::create([
+                'id_customer' => auth()->id(),
+                'nama_makanan' => $item->nama_makanan,
+                'nama_customer' => $user->username,
+                'kamar' => $user->no_kamar,
+                'qty' => $item->qty,
+                'status' => 'belum selesai',
+            ]);
+    
+            $item->delete();
+        }
+    
+        return redirect('/dashboard/customer/terimakasih')->with('success', 'Order has been created successfully.');
+    }
+    
+    public function terimakasih() {
+        return view('pages.terimakasih');
     }
   
 }
