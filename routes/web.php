@@ -115,6 +115,7 @@ Route::group(['middleware', 'auth'], function () {
 	Route::post('/addToCart/{id}/perform', [CartController::class, 'addToCart'])->name('add-cart.perform')->middleware('auth');
 	Route::delete('/hapuscart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
 	Route::post('/bayar', [CartController::class, 'bayar'])->name('bayar-cart');
-	Route::get('/dashboard/{auth}/pembayaranmakanan', [CartController::class, 'pembayaran']);
+	Route::get('/dashboard/{auth}/pembayaranmakanan', [CartController::class, 'pembayaranview']);
+	Route::put('/uploadbukti/{id}/perform', [CartController::class, 'uploadbukti'])->name('upload-bukti.perform');
 });
 

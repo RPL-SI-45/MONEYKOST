@@ -71,25 +71,42 @@ class CartController extends Controller
             'id_customer' => Auth::id(),
             'grandTotal' => $attributes['grandTotal'],
         ]);
-        Cart::where('id_customer', Auth::id())->delete();
+        // Cart::where('id_customer', Auth::id())->delete();
 
         
         return redirect("/dashboard/customer/pembayaranmakanan");
     }
 
-    public function pembayaran(string $auth)
-    {
-        $data = PembayaranMakanan::where('id_customer', Auth::id())->get();
-            $result = array();
-            foreach($data as $item) {
-                $result[] = [
-                    'id' => $item->id,
-                    'grandTotal' => $item->grandTotal,
-                    'bukti' => $item->bukti,
-                    'status' => $item->status,
-                ];
-            }
-            return view('pages.pembayaran-makanan', ['data' => $result]);
+    public function pembayaranview(string $auth){
+        $data = PembayaranMakanan::where('id_customer', Auth::id())->get()->first(); // Retrieve the first item
+
+        if ($data) {
+            return view('pages.pembayaran-makanan', ['data' => $data]);
+        } else {
+
+        }
+    }
+
+    public function uploadbukti($id, Request $request) {
+        $attributes = $request->validate([
+            'bukti' => 'sometimes|image|mimes:jpeg,jpg,png,gif',
+        ]);
+    
+        $pembayaran_makanan = PembayaranMakanan::find($id);
+    
+        if ($request->hasFile('bukti')) {
+            $file = $request->file('bukti');
+            $fileName = $file->getClientOriginalName();
+            $filePath = $file->storeAs('public', $fileName);
+    
+            $pembayaran_makanan->update([
+                "bukti" => $fileName,
+            ]);
+        } else {
+            $pembayaran_makanan->update($request->except(['_token', 'submit', 'bukti']));
+        }
+    
+        return redirect('/dashboard/admin/menumakanan');
     }
   
 }
