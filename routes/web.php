@@ -17,8 +17,8 @@ use App\Http\Controllers\{
 	WifiController,
 	SearchFilter,
 	ProfileController,
-	CartController
-
+	CartController,
+	orderController
 }; 
 use Illuminate\Support\Facades\Route;
 
@@ -118,5 +118,7 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/dashboard/{auth}/pembayaranmakanan', [CartController::class, 'pembayaranview']);
 	Route::put('/uploadbukti/{id}/perform', [CartController::class, 'uploadbukti'])->name('upload-bukti.perform');
 	Route::get('/dashboard/{auth}/terimakasih', [CartController::class, 'terimakasih'])->name('terimakasih')->middleware('auth');
+	Route::get('/dashboard/{auth}/kelolapembayaranmakanan', [OrderController::class, 'index'])->middleware('auth');
+	Route::get('/ubahStatus/{id}/{status}/pembayaranmakanan', [OrderController::class, 'ubah'])->name('ubah-status-pembayaranmakanan');
 });
 
