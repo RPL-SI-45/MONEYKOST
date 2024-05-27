@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('no_hp')->nullable();
             $table->string('name')->nullable();
             $table->rememberToken();
+            $table->string('gambar_profile')->nullable();
         });
     }
 

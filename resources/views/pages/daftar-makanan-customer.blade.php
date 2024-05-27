@@ -14,24 +14,35 @@
 
     </style>
 
-    <div class="container">
+<div class="container">
     <form class="search-form" action="{{ route('searchmakanan') }}" method="GET">
-    <div class="row align-items-center"> <!-- Changed from form-row to row -->
-        <div class="col-sm-2 mb-2">
-            <input class="form-control" type="text" name="cari" placeholder="Cari Makanan .." value="{{ old('cari') }}">
+        <div class="row align-items-center"> <!-- Changed from form-row to row -->
+            <div class="col-sm-2 mb-2">
+                <input class="form-control" type="text" name="cari" placeholder="Cari Makanan .." value="{{ old('cari') }}">
+            </div>
+            <div class="form-group col-sm-2 mb-1">
+                <select name="kategori" class="form-control">
+                    <option disabled selected value>Semua Kategori</option>
+                    <option value="makanan" {{ request('kategori') == 'Makanan Utama' ? 'selected' : '' }}>Makanan</option>
+                    <option value="minuman" {{ request('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
+                </select>
+            </div>
+            <div class="col-md-1"> 
+                <input type="submit" value="Cari" class="btn btn-warning btn-rounded mt-0 mb-0">
+            </div>
+            <div class="col-md-7 d-flex justify-content-end"> <!-- New column to push the cart button to the right -->
+                <a class="nav-link {{ str_contains(request()->url(), 'dashboardmain') == true ? 'active' : '' }}" href="{{ route('cart', ['auth' => Auth::user()->auth]) }}">
+                    <div class="btn btn-info btn-rounded btn-sm mt-0 mb-0">
+                        <div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center">
+                            <i class="ni ni-cart text-white text-lg opacity-10 mt-0 mb-0"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="form-group col-sm-2 mb-1">
-            <select name="kategori" class="form-control">
-                <option disabled selected value>Semua Kategori</option>
-                <option value="makanan" {{ request('kategori') == 'Makanan Utama' ? 'selected' : '' }}>Makanan</option>
-                <option value="minuman" {{ request('kategori') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
-            </select>
-        </div>
-        <div class="col-md-1 "> 
-            <input type="submit" value="Cari" class="btn btn-warning btn-rounded mt-0 mb-0">
-        </div>
-    </div>
-</form>
+    </form>
+
+
 
 
 

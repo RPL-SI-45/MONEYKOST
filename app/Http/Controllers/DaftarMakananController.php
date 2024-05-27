@@ -91,7 +91,7 @@ class DaftarMakananController extends Controller
             $daftar_makanan->update($request->except(['_token', 'submit', 'gambar_makanan']));
         }
     
-        return redirect('/dashboard/admin/menumakanan');
+        return redirect('/dashboard/customer/menumakanan/terimakasih');
     }
     
 }
