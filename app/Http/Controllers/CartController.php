@@ -93,7 +93,7 @@ class CartController extends Controller
 
     public function uploadbukti($id, Request $request) {
         $attributes = $request->validate([
-            'bukti' => 'sometimes|image|mimes:jpeg,jpg,png,gif',
+            'bukti' => 'required|image|mimes:jpeg,jpg,png,gif',
         ]);
     
         $user = auth()->user();
@@ -106,7 +106,7 @@ class CartController extends Controller
             return redirect()->back()->withErrors(['message' => 'PembayaranMakanan record not found for this user.']);
         }
     
-        if ($request->hasFile('bukti')) {
+
             $file = $request->file('bukti');
             $fileName = time() . '_' . $file->getClientOriginalName(); 
             $filePath = $file->storeAs('public', $fileName);
@@ -114,9 +114,7 @@ class CartController extends Controller
             $pembayaran_makanan->update([
                 'bukti' => $fileName,
             ]);
-        } else {
-            $pembayaran_makanan->update($request->except(['_token', 'submit', 'bukti']));
-        }
+
     
         $cartItems = Cart::where('id_customer', $user->id)->get();
     
