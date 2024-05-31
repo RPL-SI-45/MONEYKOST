@@ -19,11 +19,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="buktiInput" class="form-control-label">Silahkan Upload Bukti Pembayaran</label>
-                                <input class="form-control" type="file" id="buktiInput" name="bukti">
+                                <input dusk="inputgambar" class="form-control" type="file" id="buktiInput" name="bukti">
                                 @error('gambar_makanan') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-lg btn-info btn-lg w-100 mt-4 mb-0">Upload Bukti Pembayaran</button>
+                                <button dusk="submit" type="submit" class="btn btn-lg btn-info btn-lg w-100 mt-4 mb-0">Upload Bukti Pembayaran</button>
                             </div>
                         </form>
                     </div>

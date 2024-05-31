@@ -21,4 +21,8 @@ class Order extends Model
         'kamar',
         'status'
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id_customer','id');
+    }
 }
