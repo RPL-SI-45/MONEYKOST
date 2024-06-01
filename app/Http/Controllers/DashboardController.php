@@ -2,14 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pembayaran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Models\PembayaranWifi;
+use App\Models\{
+    Pembayaran,
+    PembayaranWifi,
+    PembayaranKost,
+    Pembayaranlistrik,
+    PembayaranMakanan,
+    PembayaranWifiUser,
+    User,
+    Order
+};
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    private function format_rupiah($number)
+    {
+        return 'Rp ' . number_format($number, 0, ',', '.');
+    }
     public function index() {
         if (Auth::check()) {
             if (Auth::user()->auth == 'admin') {
@@ -22,64 +35,46 @@ class DashboardController extends Controller
         }
     }
     public function admin() {
-        $user_id = auth()->user()->id;
+        $totalLaundry = Pembayaran::where('status', 'lunas')->get()->sum(function ($payment) {
+            return intval(str_replace('.', '', $payment->jumlah));
+        });
 
-        // Define the months
-        $months = [
-            2 => 'Februari',
-            3 => 'Maret',
-            4 => 'April',
-            5 => 'Mei'
-        ];
+        $totalKost = PembayaranKost::where('status', 'lunas')->get()->sum(function ($payment) {
+            return intval(str_replace('.', '', $payment->jumlah));
+        });
 
-        // Initialize array to store totals
-        $totals = []; //total wifi
+        $totalListrik = Pembayaranlistrik::where('status', 'lunas')->get()->sum(function ($payment) {
+            return intval(str_replace('.', '', $payment->jumlah));
+        });
 
-        $totals_laundry = []; //total laundry
+        $totalWifi = PembayaranWifi::where('status', 'lunas')->get()->sum(function ($payment) {
+            return intval(str_replace('.', '', $payment->jumlah));
+        });
 
-        // Iterate over each month and calculate the total
-        foreach ($months as $month => $monthName) {
-            $query = PembayaranWifi::where('id_customer', $user_id)
-                                ->whereMonth('tanggal_tagihan', $month);
+        $totalWifiUser = PembayaranWifiUser::where('Status', 'lunas')->get()->sum(function ($payment) {
+            return intval(str_replace('.', '', $payment->jumlah));
+        });
 
-            // Get filtered data
-            $data_wifi = $query->get();
+        $totalMakanan = PembayaranMakanan::where('status', 'lunas')->get()->sum(function ($payment) {
+            return intval(str_replace('.', '', $payment->grandTotal));
+        });
 
-            // Calculate total amount for the month
-            $total = 0;
-            foreach ($data_wifi as $data) {
-                $total += (int)$data->jumlah; // Ensure jumlah is treated as an integer
-            }
+        $totalUsers = User::count();
 
-            // Store the total in the array
-            $totals[$monthName] = [
-                'total' => $total,
-                'status' => $data_wifi->isNotEmpty() ? $data_wifi->first()->status : 'N/A' // Get the status of the first record or set 'N/A'
-            ];
-        }
+        $totalPembayaran = $this->format_rupiah($totalLaundry + $totalKost + $totalListrik + $totalWifi + $totalWifiUser + $totalMakanan);
+        $totalPembayaranKost = $this->format_rupiah($totalKost);
 
-        foreach ($months as $month => $monthName) {
-            $query = Pembayaran::where('id_customer', $user_id)
-                                ->whereMonth('tanggal_tagihan', $month);
-        
-            // Get filtered data
-            $data_laundry = $query->get();
-        
-            // Calculate total amount for the month
-            $total_laundry = 0;
-            foreach ($data_laundry as $data) {
-                $total_laundry += (int)$data->jumlah; // Ensure jumlah is treated as an integer
-            }
-        
-            // Store the total in the array
-            $totals_laundry[$monthName] = [
-                'total' => $total_laundry,
-                'status' => $data_laundry->isNotEmpty() ? $data_laundry->first()->status : 'N/A' // Get the status of the first record or set 'N/A'
-            ];
-        }
-        
-      
-        return view('pages.dashboard-admin', compact('totals', 'totals_laundry'));
+        $posts = Order::query();
+        $topMakanan = $posts->select('nama_makanan', DB::raw('SUM(qty) as total_qty'))
+            ->groupBy('nama_makanan')
+            ->orderByDesc('total_qty')
+            ->take(5)
+            ->get();
+        $maxQty = $topMakanan->max('total_qty');
+
+        $totalQty = $topMakanan->sum('total_qty');
+
+        return view('pages.dashboard-admin', compact('totalUsers', 'totalPembayaran', 'topMakanan', 'maxQty', 'totalPembayaranKost', 'totalQty'));
 
         
     }

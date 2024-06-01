@@ -11,13 +11,13 @@
                             <div class="col-8">
                                 <div class="numbers">
                                     <h5 class="font-weight-bolder">
-                                        RP. 700.000
+                                        {{$totalPembayaran}}
                                     </h5>
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Food Sales</p>
-                                    <p class="mb-0">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Pembayaran</p>
+                                    <!-- <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+55%</span>
                                         since yesterday
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -35,14 +35,14 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Customer</p>
                                     <h5 class="font-weight-bolder">
-                                        2,300
+                                        {{$totalUsers}}
                                     </h5>
-                                    <p class="mb-0">
+                                    <!-- <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+3%</span>
                                         since last week
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -60,19 +60,19 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
                                     <h5 class="font-weight-bolder">
-                                        +3,462
+                                        {{$totalPembayaranKost}}
                                     </h5>
-                                    <p class="mb-0">
-                                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                        since last quarter
-                                    </p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Pembayaran Kost</p>
+                                    <!-- <p class="mb-0">
+                                        <span class="text-success text-sm font-weight-bolder">+55%</span>
+                                        since yesterday
+                                    </p> -->
                                 </div>
                             </div>
                             <div class="col-4 text-end">
-                                <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                                <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -85,13 +85,13 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Food Sales</p>
                                     <h5 class="font-weight-bolder">
-                                        $103,430
+                                        {{ $totalQty }}
                                     </h5>
-                                    <p class="mb-0">
+                                    <!-- <p class="mb-0">
                                         <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                                    </p>
+                                    </p> -->
                                 </div>
                             </div>
                             <div class="col-4 text-end">
@@ -190,94 +190,42 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $colors = ['bg-success', 'bg-primary', 'bg-info', 'bg-danger', 'bg-warning'];
+                                @endphp
+                                @foreach ($topMakanan as $index => $makanan)
+                                @php
+                                    $randomColor = $colors[array_rand($colors)];
+                                @endphp
                                 <tr>
                                     <td>
                                         <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">1</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $index + 1}}</p>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Indomie Goreng</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$makanan->nama_makanan}}</p>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="progress">
-                                            <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
+                                            <div class="progress-bar {{$randomColor}}" role="progressbar" 
+                                                style="width: {{ ($makanan->total_qty / $maxQty) * 100 }}%;" 
+                                                aria-valuenow="{{ $makanan->total_qty }}" 
+                                                aria-valuemin="0" 
+                                                aria-valuemax="{{ $maxQty }}">
+                                                {{ number_format(($makanan->total_qty / $maxQty) * 100, 2) }}%
+                                            </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">45 %</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ number_format(($makanan->total_qty)) }}</p>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">2</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Nasi Goreng</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">29 %</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">3</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Ayam Bakar</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">18 %</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">4</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">Ayam Goreng</p>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">25 %</p>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
