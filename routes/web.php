@@ -18,7 +18,9 @@ use App\Http\Controllers\{
 	SearchFilter,
 	ProfileController,
 	CartController,
-	orderController
+	orderController,
+	HistoryOrderController,
+	HistoryOrderCustomerController
 }; 
 use Illuminate\Support\Facades\Route;
 
@@ -108,9 +110,15 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
 	Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
 
+	// Kelola Data Pemesanan Makanan
+	Route::get('dashboard/{auth}/history-orders', [HistoryOrderController::class, 'showHistoryOrders'])->name('pages.historyorders');
+	Route::get('/ubah-status/{id}/{status}', [HistoryOrderController::class, 'ubah'])->name('ubah-status-order');
+	Route::delete('/hapus-order/{id}', [HistoryOrderController::class, 'destroy'])->name('hapus-order');
+
+	// Data Pemesanan Makanan Customer
+	Route::get('/dashboard/{auth}/order-history', [HistoryOrderCustomerController::class, 'index'])->name('order-history');
+	
 	// Routes/web.php
-
-
 	Route::get('/dashboard/{auth}/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 	Route::post('/addToCart/{id}/perform', [CartController::class, 'addToCart'])->name('add-cart.perform')->middleware('auth');
 	Route::delete('/hapuscart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
