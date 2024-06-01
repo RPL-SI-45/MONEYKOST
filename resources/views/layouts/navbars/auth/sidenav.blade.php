@@ -35,6 +35,13 @@
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Makanan</span>
                     </a>
+                    <a class="nav-link {{ str_contains(request()->url(), 'history-orders') == true ? 'active' : '' }}" href="{{ route('pages.historyorders', ['auth' => Auth::user()->auth]) }}">
+                    <div 
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-archive-2 text-warning text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">History Orders</span>
+                    </a>
                 @else(Auth::user()->auth == "customer")
                     <a class="nav-link {{ str_contains(request()->url(), 'dashboardmain') == true ? 'active' : '' }}" href="{{route('dashboard_customer', ['auth' => 'customer']) }}">
                         <div
@@ -43,6 +50,13 @@
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
+                    <a class="nav-link {{ request()->is('dashboard/' . Auth::user()->auth . '/order-history') ? 'active' : '' }}" href="{{ route('order-history', ['auth' => Auth::user()->auth]) }}">
+                    <div 
+                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-warning"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Order History</span>
+                </a>
                 @endif
                 <a class="nav-link {{ str_contains(request()->url(), 'pembayaranlaundry') == true ? 'active' : '' }}" href="{{ route('pembayaran', ['auth' => Auth::user()->auth]) }}">
                     <div
@@ -83,7 +97,6 @@
                     </div>
                     <span class="nav-link-text ms-1">Menu Makanan</span>
                 </a>
-
             </li>
             <li class="nav-item">
                 <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">

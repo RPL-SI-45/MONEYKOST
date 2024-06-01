@@ -47,7 +47,10 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id_customer', 'id');
+    }
     /**
      * Always encrypt the password when it is updated.
      *

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -21,4 +20,14 @@ class Order extends Model
         'kamar',
         'status'
     ];
+
+    public function menu()
+    {
+        return $this->belongsTo(DaftarMakanan::class, 'nama_makanan', 'nama_makanan');
+    }
+
+    public function pembayaran()
+    {
+        return $this->belongsTo(PembayaranMakanan::class, 'id_pembayaran');
+    }
 }

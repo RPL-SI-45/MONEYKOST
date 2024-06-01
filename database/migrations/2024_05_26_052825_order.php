@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('kamar');
             $table->string('status');
             $table->timestamps();
+        Schema::table('orders', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->nullable()->after('nama_customer');
+            $table->foreign('id')->references('id')->on('daftar_menu_makanan');
+            });
         });
     }
 
@@ -29,5 +33,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('order');
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign(['id']);
+            $table->dropColumn('id');
+        });
     }
 };
