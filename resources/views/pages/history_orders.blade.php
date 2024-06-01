@@ -28,7 +28,15 @@
                                         <td><p class="text-center text-xs font-weight-bold mb-0">{{ $order['id'] }}</p></td>
                                         <td><p class="text-center text-xs font-weight-bold mb-0">{{ $order['nama_makanan'] }}</p></td>
                                         <td><p class="text-center text-xs font-weight-bold mb-0">{{ $order['qty'] }}</p></td>
-                                        <td><p class="text-center text-xs font-weight-bold mb-0">{{ $order['status'] }}</p></td>
+                                        <td class="align-middle text-center text-s">
+                                            @if ($order['status'] == 'Selesai dimasak')
+                                                <span class="badge badge-sm bg-gradient-success">{{ $order['status'] }}</span>
+                                            @elseif ($order['status'] == 'Sedang dimasak')
+                                                <span class="badge badge-sm bg-gradient-warning">{{ $order['status'] }}</span>
+                                            @else
+                                                <span class="badge badge-sm bg-gradient-danger">{{ $order['status'] }}</span>
+                                            @endif
+                                        </td>
                                         <td><p class="text-center text-xs font-weight-bold mb-0">{{ $order['created_at'] }}</p></td>
                                         <td><p class="text-center text-xs font-weight-bold mb-0">Rp.{{ $order['grand_total'] }}.000</p></td>
                                     </tr>
