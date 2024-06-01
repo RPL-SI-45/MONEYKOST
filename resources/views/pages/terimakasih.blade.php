@@ -19,7 +19,7 @@
                             </div>
                         @endif
                         <p class="mb-0">Terima kasih, pembayaran Anda telah berhasil. Makanan yang anda pesan akan segera kami persiapkan</p>
-                        <a href="{{ url('/dashboard/customer/menumakanan') }}" class="btn btn-primary mt-3">Kembali ke halaman menu</a>
+                        <a href="{{ url('/dashboard/customer/order-history') }}" class="btn btn-primary mt-3">Lihat Order</a>
                     </div>
                 </div>
             </div>

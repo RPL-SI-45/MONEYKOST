@@ -118,7 +118,7 @@ Route::group(['middleware', 'auth'], function () {
 	// Data Pemesanan Makanan Customer
 	Route::get('/dashboard/{auth}/order-history', [HistoryOrderCustomerController::class, 'index'])->name('order-history');
 	
-	// Routes/web.php
+	// Cart
 	Route::get('/dashboard/{auth}/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 	Route::post('/addToCart/{id}/perform', [CartController::class, 'addToCart'])->name('add-cart.perform')->middleware('auth');
 	Route::delete('/hapuscart/{id}', [CartController::class, 'destroy'])->name('delete-cart');

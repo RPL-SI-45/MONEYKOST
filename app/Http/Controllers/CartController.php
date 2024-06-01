@@ -131,7 +131,6 @@ class CartController extends Controller
             $item->delete();
         }
     
-        // Step 7: Redirect to the desired page
         return redirect('/dashboard/customer/terimakasih')->with('success', 'Order has been created successfully.');
     }
     
