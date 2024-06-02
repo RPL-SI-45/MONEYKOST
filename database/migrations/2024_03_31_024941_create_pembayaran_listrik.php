@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_customer');
             $table->date('tanggaltagihan');
-            $table->integer('jumlah');
+            $table->string('jumlah');
             $table->integer('kwh');
             $table->string('bukti')->nullable();
             $table->enum('status', ['lunas', 'belum']);
