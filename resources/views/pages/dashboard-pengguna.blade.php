@@ -6,64 +6,26 @@
         <div class="container mt-0">
             <h3 class="mb-4">Pembayaran Wifi</h3>
             <div class="row">
+                @foreach ($totals as $monthName => $data)
                 <div class="col-md-3">
-                    <div class="card card-custom bg-march">
-                        <h5>Maret</h5>
-                        <p>Rp. 80.000</p>
-                        <p>Belum Lunas</p>
+                    <div class="card card-custom bg-{{ strtolower($monthName) }}">
+                        <h5>{{ $monthName }}</h5>
+                        <p>Rp. {{ number_format($data['total'], 0, ',', '.') }}</p>
+                        <p>{{ $data['status'] }}</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card card-custom bg-february">
-                        <h5>Februari</h5>
-                        <p>Rp. 85.000</p>
-                        <p>Lunas</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom bg-january">
-                        <h5>Januari</h5>
-                        <p>Rp. 78.000</p>
-                        <p>Lunas</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom bg-december">
-                        <h5>Desember</h5>
-                        <p>Rp. 79.000</p>
-                        <p>Lunas</p>
-                    </div>
-                </div>
+                @endforeach
             </div>  
             <div class="row mt-4">
+                @foreach ($totals_laundry as $monthNameLaundry => $data_lau)
                 <div class="col-md-3">
-                    <div class="card card-custom bg-march">
-                        <h5>Maret</h5>
-                        <p>Rp. 80.000</p>
-                        <p>Belum Lunas</p>
+                    <div class="card card-custom bg-{{ strtolower($monthNameLaundry) }}">
+                        <h5>{{ $monthNameLaundry }}</h5>
+                        <p>Rp. {{ number_format($data_lau['total'], 0, ',', '.') }}</p>
+                        <p>{{ $data_lau['status'] }}</p>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card card-custom bg-february">
-                        <h5>Februari</h5>
-                        <p>Rp. 85.000</p>
-                        <p>Lunas</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom bg-january">
-                        <h5>Januari</h5>
-                        <p>Rp. 78.000</p>
-                        <p>Lunas</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card card-custom bg-december">
-                        <h5>Desember</h5>
-                        <p>Rp. 79.000</p>
-                        <p>Lunas</p>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="row mt-4 justify-content-md-center">
                 <div class="col-lg-7 mb-lg-0 mb-4">
