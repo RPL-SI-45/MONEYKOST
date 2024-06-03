@@ -18,7 +18,7 @@ use App\Http\Controllers\{
 	SearchFilter,
 	ProfileController,
 	CartController,
-	orderController
+	OrderController
 }; 
 use Illuminate\Support\Facades\Route;
 
@@ -120,5 +120,7 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/dashboard/{auth}/terimakasih', [CartController::class, 'terimakasih'])->name('terimakasih')->middleware('auth');
 	Route::get('/dashboard/{auth}/kelolapembayaranmakanan', [OrderController::class, 'index'])->name('kelola-pembayaranmakanan')->middleware('auth');
 	Route::get('/ubahStatus/{id}/{status}/pembayaranmakanan', [OrderController::class, 'ubah'])->name('ubah-status-pembayaranmakanan');
+	Route::get('/dashboard/{auth}/ordernotif', [CartController::class, 'showNotifications'])->middleware('auth');
+	Route::get('/notifications/mark-as-read/{id}', [CartController::class, 'markAsRead'])->name('notifications.markAsRead');
 });
 

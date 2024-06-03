@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\PembayaranWifi;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\NewOrderNotification;
 
 class WifiController extends Controller
 {
@@ -33,6 +34,18 @@ class WifiController extends Controller
         $attributes['bukti'] = '';
         $attributes['status'] = 'belum lunas';
         PembayaranWifi::create($attributes);
+        
+        $user = auth()->user();
+        $title = 'Wifi';
+        $message = 'Ada pembelian paket wifi dari ' . $user->username ;
+        $url = ''; // Set the URL
+
+        $admins = User::where('auth', 'admin')->get();
+        
+
+        foreach ($admins as $admin) {
+            $admin->notify(new NewOrderNotification($title, $message, $url));
+        }
         return redirect("/dashboard/customer/pembayaranwifi");
     }
 
