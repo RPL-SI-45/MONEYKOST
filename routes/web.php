@@ -18,9 +18,7 @@ use App\Http\Controllers\{
 	SearchFilter,
 	ProfileController,
 	CartController,
-	orderController,
-	HistoryOrderController,
-	HistoryOrderCustomerController
+	OrderController
 }; 
 use Illuminate\Support\Facades\Route;
 
@@ -110,15 +108,9 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/dashboard/{auth}/kelolaDataCustomer', [KelolaDataCustomerController::class, 'index'])->name('kelola.data.customer');
 	Route::delete('/hapuscustomer/{id}', [KelolaDataCustomerController::class, 'destroy'])->name('delete-customer');
 
-	// Kelola Data Pemesanan Makanan
-	Route::get('dashboard/{auth}/history-orders', [HistoryOrderController::class, 'showHistoryOrders'])->name('pages.historyorders');
-	Route::get('/ubah-status/{id}/{status}', [HistoryOrderController::class, 'ubah'])->name('ubah-status-order');
-	Route::delete('/hapus-order/{id}', [HistoryOrderController::class, 'destroy'])->name('hapus-order');
+	// Routes/web.php
 
-	// Data Pemesanan Makanan Customer
-	Route::get('/dashboard/{auth}/order-history', [HistoryOrderCustomerController::class, 'index'])->name('order-history');
-	
-	// Cart
+
 	Route::get('/dashboard/{auth}/cart', [CartController::class, 'index'])->name('cart')->middleware('auth');
 	Route::post('/addToCart/{id}/perform', [CartController::class, 'addToCart'])->name('add-cart.perform')->middleware('auth');
 	Route::delete('/hapuscart/{id}', [CartController::class, 'destroy'])->name('delete-cart');
@@ -128,5 +120,6 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/dashboard/{auth}/terimakasih', [CartController::class, 'terimakasih'])->name('terimakasih')->middleware('auth');
 	Route::get('/dashboard/{auth}/kelolapembayaranmakanan', [OrderController::class, 'index'])->name('kelola-pembayaranmakanan')->middleware('auth');
 	Route::get('/ubahStatus/{id}/{status}/pembayaranmakanan', [OrderController::class, 'ubah'])->name('ubah-status-pembayaranmakanan');
+	Route::get('/dashboard/{auth}/ordernotif', [CartController::class, 'showNotifications'])->middleware('auth');
+	Route::get('/notifications/mark-as-read/{id}', [CartController::class, 'markAsRead'])->name('notifications.markAsRead');
 });
-

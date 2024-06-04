@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\DaftarMakanan;
 use App\Models\PembayaranMakanan;
 use App\Models\Order;
+use App\Notifications\NewOrderNotification;
 
 class CartController extends Controller
 {
@@ -95,29 +96,27 @@ class CartController extends Controller
         $attributes = $request->validate([
             'bukti' => 'required|image|mimes:jpeg,jpg,png,gif',
         ]);
-    
+
         $user = auth()->user();
-    
+
         $pembayaran_makanan = PembayaranMakanan::where('id_customer', $user->id)
             ->orderBy('created_at', 'desc')
             ->first();
-    
+
         if (!$pembayaran_makanan) {
             return redirect()->back()->withErrors(['message' => 'PembayaranMakanan record not found for this user.']);
         }
-    
 
-            $file = $request->file('bukti');
-            $fileName = time() . '_' . $file->getClientOriginalName(); 
-            $filePath = $file->storeAs('public', $fileName);
-    
-            $pembayaran_makanan->update([
-                'bukti' => $fileName,
-            ]);
+        $file = $request->file('bukti');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = $file->storeAs('public', $fileName);
 
-    
+        $pembayaran_makanan->update([
+            'bukti' => $fileName,
+        ]);
+
         $cartItems = Cart::where('id_customer', $user->id)->get();
-    
+
         foreach ($cartItems as $item) {
             Order::create([
                 'id_customer' => $user->id,
@@ -127,16 +126,45 @@ class CartController extends Controller
                 'qty' => $item->qty,
                 'status' => 'belum selesai',
             ]);
-    
+
             $item->delete();
         }
-    
+
+        $title = 'Order baru';
+        $message = 'Ada order makanan baru dari ' . $user->username . ' di kamar ' . $user->no_kamar;
+        $url = ''; // Set the URL
+
+        $admins = User::where('auth', 'admin')->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new NewOrderNotification($title, $message, $url));
+        }
+
         return redirect('/dashboard/customer/terimakasih')->with('success', 'Order has been created successfully.');
     }
+
+    
     
     
     public function terimakasih() {
         return view('pages.terimakasih');
     }
-  
+
+    public function showNotifications()
+    {
+        $notifications = auth()->user()->unreadNotifications;
+
+        return view('pages.notif-order', compact('notifications'));
+    }
+
+    public function markAsRead($id)
+    {
+        $notification = auth()->user()->notifications()->where('id', $id)->first();
+
+        if ($notification) {
+            $notification->markAsRead();
+        }
+
+        return redirect()->back();
+    }
 }
