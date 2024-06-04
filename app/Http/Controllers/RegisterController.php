@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Notifications\NewOrderNotification;
 
 class RegisterController extends Controller
 {
@@ -25,6 +26,16 @@ class RegisterController extends Controller
         $attributes['auth'] = 'customer';
         $user = User::create($attributes);
         //auth()->login($user);
+
+        $title = 'Penghuni Baru';
+        $message = 'Ada penghuni baru bernama ' . $attributes['username'] . ' dengan kamar ' . $attributes['no_kamar'];
+        $url = '/dashboard/admin/kelolaDataCustomer';
+
+        $admins = User::where('auth', 'admin')->get();
+
+        foreach ($admins as $admin) {
+            $admin->notify(new NewOrderNotification($title, $message, $url));
+        }
 
         return redirect('/login');
     }
