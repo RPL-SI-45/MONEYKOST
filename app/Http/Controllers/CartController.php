@@ -132,7 +132,7 @@ class CartController extends Controller
 
         $title = 'Order baru';
         $message = 'Ada order makanan baru dari ' . $user->username . ' di kamar ' . $user->no_kamar;
-        $url = ''; // Set the URL
+        $url = 'dashboard/admin/history-orders';
 
         $admins = User::where('auth', 'admin')->get();
 

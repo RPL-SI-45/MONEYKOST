@@ -38,7 +38,7 @@ class WifiController extends Controller
         $user = auth()->user();
         $title = 'Wifi';
         $message = 'Ada pembelian paket wifi dari ' . $user->username ;
-        $url = ''; // Set the URL
+        $url = '/dashboard/admin/pembayaranwifi';
 
         $admins = User::where('auth', 'admin')->get();
         
