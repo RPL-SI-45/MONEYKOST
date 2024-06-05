@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\{
 	DashboardController,
+	DashboardPenggunaController,
 	LaundryController,
 	RegisterController,
 	LoginController,
@@ -91,6 +92,7 @@ Route::group(['middleware', 'auth'], function () {
 	Route::get('/', [DashboardController::class, 'index'])->middleware('auth')->name('home');
 	Route::get('/test',[DashboardController::class, 'test']);
 	Route::get('/dashboardcustomer/{auth}',[DashboardController::class, 'test2'])->middleware('auth')->name('dashboard_customer');
+	Route::get('/dashboardcustomer/{auth}',[DashboardPenggunaController::class, 'dashboard'])->middleware('auth')->name('dashboard_customer');
 
 	// Pembayaran Laundry            
 	Route::get('/laundry/{auth}', [PembayaranController::class, 'index'])->name('home_laundry')->middleware('auth');
