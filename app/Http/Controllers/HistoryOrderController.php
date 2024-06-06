@@ -36,7 +36,7 @@ class HistoryOrderController extends Controller
     // Method to show all orders
     public function showHistoryOrders()
     {
-        $orders = Order::all();
+        $orders = Order::orderBy('created_at', 'desc')->get();
         return view('pages.historyorders', compact('orders'));
     }
 }

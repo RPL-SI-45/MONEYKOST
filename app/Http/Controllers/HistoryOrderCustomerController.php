@@ -9,25 +9,29 @@ use App\Models\Order;
 
 class HistoryOrderCustomerController extends Controller
 {
-    // Method to show all orders
     public function index()
     {
-        $data = Order::where('id_customer', Auth::id())->with('menu')->get();
+        $data = Order::where('id_customer', Auth::id())
+                     ->with('menu')
+                     ->orderBy('created_at', 'desc')
+                     ->get();
+    
         $result = array();
-
+    
         foreach ($data as $item) {
             $grandTotal = $item->menu->harga_makanan * $item->qty;
-
+    
             $result[] = [
                 'id' => $item->id,
                 'nama_makanan' => $item->nama_makanan,
                 'status' => $item->status,
                 'qty' => $item->qty,
                 'created_at' => $item->created_at,
-                'grand_total' => $grandTotal // Menghitung grand total
+                'grand_total' => $grandTotal
             ];
         }
-
+    
         return view('pages.history_orders', ['data' => $result]);
     }
+    
 }

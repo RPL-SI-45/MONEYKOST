@@ -54,14 +54,14 @@
                     <a class="nav-link {{ str_contains(request()->url(), 'dashboardmain') == true ? 'active' : '' }}" href="{{route('dashboard_customer', ['auth' => 'customer']) }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-chart-pie-35 text-warning text-sm opacity-10"></i>
+                        <i class="ni ni-chart-pie-35 text-info text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Dashboard</span>
                     </a>
                     <a class="nav-link {{ request()->is('dashboard/' . Auth::user()->auth . '/order-history') ? 'active' : '' }}" href="{{route('order-history', ['auth' => 'customer']) }}">
                     <div 
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-success"></i>
+                        <i class="ni ni-bullet-list-67 text-warning"></i>
                     </div>
                     <span class="nav-link-text ms-1">Order History</span>
                 </a>
@@ -69,7 +69,7 @@
                 <a class="nav-link {{ str_contains(request()->url(), 'pembayaranlaundry') == true ? 'active' : '' }}" href="{{ route('pembayaran', ['auth' => Auth::user()->auth]) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bag-17 text-warning text-sm opacity-10"></i>
+                        <i class="ni ni-bag-17 text-success text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Laundry</span>
                 </a>
@@ -77,7 +77,7 @@
                 <a class="nav-link {{ str_contains(request()->url(), 'pembayarankost') == true ? 'active' : '' }}" href="{{ route('pembayarankost', ['auth' => Auth::user()->auth]) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-building text-success text-sm opacity-10"></i>
+                        <i class="ni ni-building text-danger text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Kost</span>
                 </a>
@@ -85,7 +85,7 @@
                 <a class="nav-link {{ str_contains(request()->url(), 'pembayaranlistrik') == true ? 'active' : '' }}" href="{{ route('pembayaranlistrik', ['auth' => Auth::user()->auth]) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-cloud-download-95 text-danger text-sm opacity-10"></i>
+                        <i class="ni ni-cloud-download-95 text-info text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Listrik</span>
                 </a>
@@ -93,7 +93,7 @@
                 <a class="nav-link {{ str_contains(request()->url(), 'pembayaranwifi') == true ? 'active' : '' }}" href="{{ route('pembayaranwifi', ['auth' => Auth::user()->auth]) }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-spaceship text-info text-sm opacity-10"></i>
+                        <i class="ni ni-spaceship text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Pembayaran Wifi</span>
                 </a>

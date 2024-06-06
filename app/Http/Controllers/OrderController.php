@@ -13,10 +13,10 @@ class orderController extends Controller
 {
     public function index(string $auth) {
         if ($auth == "admin") {
-            $pembayaran_makanan = PembayaranMakanan::all();
+            $pembayaran_makanan = PembayaranMakanan::orderBy('created_at', 'desc')->get();
             return view('pages.kelola-pembayaran-makanan', ['pembayaran_makanan' => $pembayaran_makanan]);
         } else {
-           
+
         }
     }
     public function ubah(int $id, int $status) {
