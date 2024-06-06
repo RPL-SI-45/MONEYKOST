@@ -8,6 +8,9 @@
                     <div class="card-header pb-0 d-flex align-items-center justify-content-between">
                         <h6>Pembayaran Makanan</h6>
                     </div>
+                    <div class="text-center">
+                        <img src="/img/qris.png" alt="qris" class="img-fluid" style="max-width: 200px;">
+                    </div>
                     <div class="card-body">
                         <form role="form" method="POST" action="/uploadbukti/{{$data->id}}/perform" enctype="multipart/form-data">
                             @csrf
