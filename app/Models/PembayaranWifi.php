@@ -22,4 +22,9 @@ class PembayaranWifi extends Model
         'bukti',
         'status'
     ];
+
+    public static function getLatestPayments($limit = 4)
+    {
+        return self::orderBy('tanggal_tagihan', 'desc')->take($limit)->get();
+    }
 }

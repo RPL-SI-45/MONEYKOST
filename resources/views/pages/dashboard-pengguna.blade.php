@@ -2,49 +2,63 @@
 
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard', 'titleSub' => 'Customer : '])
+
     <div class="container-fluid">
         <div class="container mt-0">
-            <div class="col-md-4">
-                <div class="card card-custom py-0" style="background-color: #5D5FF0;">
-                    <h5 class="text-white text-3xl">Pembayaran Wifi</h5>
-                </div>
+            <div class="col-md-4 mb-4">
+            <div class="card card-custom py-2 text-center" style="background-color: #5D5FF0;">
+                <h5 class="text-white text-3xl m-0">Pembayaran Wifi</h5>
             </div>
+            </div>
+
             <div class="row">
                 @php
                     $colors = ['#FFDDC1', '#BEEBE9', '#FFD6E0', '#C9CCE1', '#FFB6C1', '#C0C4CF', '#D0F0C0'];
                     $colorIndex = 0;
                 @endphp
-                @foreach ($totals as $monthName => $data)
-                <div class="col-md-3">
-                    <div class="card card-custom" style="background-color: {{ $colors[$colorIndex % count($colors)] }};">
-                        <h5>{{ $monthName }}</h5>
-                        <p>Rp. {{ number_format($data['total'], 0, ',', '.') }}</p>
-                        <p>{{ $data['status'] }}</p>
+                @foreach ($wifi as $data)
+                    <div class="col-md-3 mb-4">
+                        <div class="card card-custom" style="background-color: {{ $colors[$colorIndex % count($colors)] }};">
+                            @php
+                                $monthName = \Carbon\Carbon::parse($data->tanggal_tagihan)->locale('id')->translatedFormat('F');
+                            @endphp
+                            <div class="card-body">
+                                <h5>{{ $monthName }}</h5>
+                                <p>Rp. {{$data['jumlah']}}</p>
+                                <p>{{ $data['status'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                @php
-                    $colorIndex++;
-                @endphp
+                    @php
+                        $colorIndex++;
+                    @endphp
                 @endforeach
             </div>
+
             <div class="row mt-4">
                 <h3 class="mb-4">Pembayaran Laundry</h3>
                 @php
                     $colorIndex = 0;
                 @endphp
-                @foreach ($totals_laundry as $monthNameLaundry => $data_lau)
-                <div class="col-md-3">
-                    <div class="card card-custom" style="background-color: {{ $colors[$colorIndex % count($colors)] }};">
-                        <h5>{{ $monthNameLaundry }}</h5>
-                        <p>Rp. {{ number_format($data_lau['total'], 0, ',', '.') }}</p>
-                        <p>{{ $data_lau['status'] }}</p>
+                @foreach ($laundry as $data_lau)
+                    <div class="col-md-3 mb-4">
+                        <div class="card card-custom" style="background-color: {{ $colors[$colorIndex % count($colors)] }};">
+                            @php
+                                $monthName = \Carbon\Carbon::parse($data_lau->tanggal_tagihan)->locale('id')->translatedFormat('F');
+                            @endphp
+                            <div class="card-body">
+                                <h5>{{ $monthName }}</h5>
+                                <p>Rp. {{ $data_lau['jumlah']}}</p>
+                                <p>{{ $data_lau['status'] }}</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                @php
-                    $colorIndex++;
-                @endphp
+                    @php
+                        $colorIndex++;
+                    @endphp
                 @endforeach
             </div>
+
             <div class="row mt-4 justify-content-md-center">
                 <div class="col-lg-7 mb-lg-0 mb-4">
                     <div class="card">
@@ -64,17 +78,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($top_foods as $index => $food)
-                                    <tr>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $index + 1 }}</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $food->nama_makanan }}</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $food->total_qty }}</p>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $index + 1 }}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $food->nama_makanan }}</p>
+                                            </td>
+                                            <td class="text-center">
+                                                <p class="text-xs font-weight-bold mb-0">{{ $food->total_qty }}</p>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
@@ -84,13 +98,8 @@
             </div>
         </div>
     </div>
-@endsection
 
-@push('js')
-    <script src="./assets/js/plugins/chartjs.min.js"></script>
-    <script>
-        // Sisipkan kode JavaScript Anda di sini
-    </script>
+@endsection
 
 @push('js')
     <script src="./assets/js/plugins/chartjs.min.js"></script>
@@ -102,6 +111,7 @@
         gradientStroke1.addColorStop(1, 'rgba(251, 99, 64, 0.2)');
         gradientStroke1.addColorStop(0.2, 'rgba(251, 99, 64, 0.0)');
         gradientStroke1.addColorStop(0, 'rgba(251, 99, 64, 0)');
+
         new Chart(ctx1, {
             type: "line",
             data: {
@@ -117,7 +127,6 @@
                     fill: true,
                     data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
                     maxBarThickness: 6
-
                 }],
             },
             options: {

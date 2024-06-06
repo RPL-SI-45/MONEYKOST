@@ -19,7 +19,7 @@ class CreatePaymentWifiTable extends Migration
             $table->date('tanggal_tagihan');
             $table->string('paket');
             $table->string('jumlah');
-            $table->string('bukti')->nullable();;
+            $table->string('bukti')->nullable();
             $table->string('status')->nullable();
         });
     }
