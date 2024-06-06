@@ -6,10 +6,10 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class HistoryTest extends DuskTestCase
+class HistoryAdminTest extends DuskTestCase
 {
     /**
-     *@group history
+     *@group historyadmin
      */
     public function testExample(): void
     {
@@ -17,11 +17,11 @@ class HistoryTest extends DuskTestCase
             $browser->visit('/')
             ->assertPathIs('/login')
             ->assertSee('Sign In')
-            ->type('email','aufar@gmail.com')
+            ->type('email','ujang@gmail.com')
             ->type('password','12345')
             ->press('@submit')
-            ->assertPathIs('/pembayaranlaundry/customer')
-            ->visit('dashboard/customer/order-history')
+            ->assertPathIs('/dashboardmain/customer')
+            ->visit('dashboard/admin/history-orders')
             ->assertSee('History Orders');
         });
     }

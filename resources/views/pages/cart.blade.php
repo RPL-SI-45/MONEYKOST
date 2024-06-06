@@ -23,7 +23,7 @@
                   <form action="/hapuscart/{{ $item['id'] }}" method="POST">
                     @csrf
                     @method('delete')
-                    <input type="submit" class="btn btn-lg btn-danger btn-rounded mt-3 mb-0" value="Delete">
+                    <input dusk="delete" type="submit" class="btn btn-lg btn-danger btn-rounded mt-3 mb-0" value="Delete">
                   </form>
                 </div>
               </div>
@@ -54,7 +54,7 @@
             @error('grandTotal') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
       </div>
       <div class="card-body d-flex justify-content-center">
-        <button type="submit" class="btn btn-lg btn-info w-50 btn-rounded mt-0 mb-0">Bayar</button>
+        <button dusk="bayar" type="submit" class="btn btn-lg btn-info w-50 btn-rounded mt-0 mb-0">Bayar</button>
       </div>
     </div>
   </form>

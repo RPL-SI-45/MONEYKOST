@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-7 d-flex justify-content-end"> <!-- New column to push the cart button to the right -->
                 <a class="nav-link {{ str_contains(request()->url(), 'dashboardmain') == true ? 'active' : '' }}" href="{{ route('cart', ['auth' => Auth::user()->auth]) }}">
-                    <div class="btn btn-info btn-rounded btn-sm mt-0 mb-0">
+                    <div dusk="cart" class="btn btn-info btn-rounded btn-sm mt-0 mb-0">
                         <div class="icon icon-shape icon-sm border-radius-md d-flex align-items-center justify-content-center">
                             <i class="ni ni-cart text-white text-lg opacity-10 mt-0 mb-0"></i>
                         </div>
@@ -58,7 +58,7 @@
                                     <p class="text-gray-700 text-base">
                                         Rp. {{$data['harga_makanan']}}
                                     </p>
-                                    <button class="btn btn-lg btn-info btn-rounded btn-lg w-100 mt-4 mb-0">Beli</button>
+                                    <button dusk="beli-{{$data['id']}}" class="btn btn-lg btn-info btn-rounded btn-lg w-100 mt-4 mb-0">Beli</button>
                                 </div>
                             </a>
                         </div>

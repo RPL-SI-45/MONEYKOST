@@ -55,7 +55,7 @@ class CartController extends Controller
             ]);
         }
         
-        return redirect("/dashboard/customer/cart");
+        return redirect("/dashboard/customer/menumakanan");
     }
     
     public function destroy(int $id) {

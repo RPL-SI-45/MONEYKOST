@@ -18,7 +18,7 @@
              @error('qty') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-lg btn-info btn-lg w-100 mt-4 mb-0">Add to cart</button>
+                <button dusk="submit" type="submit" class="btn btn-lg btn-info btn-lg w-100 mt-4 mb-0">Add to cart</button>
             </div>
         </div>
     </form>

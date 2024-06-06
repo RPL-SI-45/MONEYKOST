@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="buktiInput" class="form-control-label">Silahkan Upload Bukti Pembayaran</label>
-                                <input class="form-control" type="file" id="buktiInput" name="bukti">
+                                <input dusk = "inputgambar" class="form-control" type="file" id="buktiInput" name="bukti">
                                 @error('bukti') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                             </div>
                             <div class="form-group">
