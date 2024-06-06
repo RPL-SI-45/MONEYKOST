@@ -70,7 +70,9 @@ class CartTest extends DuskTestCase
                     ->assertPathIs('/dashboard/customer/cart')
                     ->assertSee('Teh Manis')
                     ->assertSee('Ayam Bakar')
+                    ->screenshot('CartAwal')
                     ->press('@delete')
+                    ->screenshot('CartSetelahDelete')
                     ->press('@bayar')
                     ->assertSee('Pembayaran Makanan')
                     ->assertPathIs('/dashboard/customer/pembayaranmakanan')
@@ -78,6 +80,7 @@ class CartTest extends DuskTestCase
                     ->press('@submit')
                     ->assertPathIs('/dashboard/customer/terimakasih')
                     ->assertSee('Pembayaran Telah Berhasil')
+                    ->screenshot('CartSelesai')
                 ;
         });
     }
