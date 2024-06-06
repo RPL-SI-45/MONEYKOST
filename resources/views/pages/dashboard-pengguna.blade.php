@@ -36,28 +36,28 @@
             </div>
 
             <div class="row mt-4">
-                <h3 class="mb-4">Pembayaran Laundry</h3>
+            <h3 class="mb-4">Pembayaran Laundry</h3>
+            @php
+                $colorIndex = 0;
+            @endphp
+    @foreach ($laundry as $data_lau)
+        <div class="col-md-3 mb-4">
+            <div class="card card-custom" style="background-color: {{ $colors[$colorIndex % count($colors)] }};">
                 @php
-                    $colorIndex = 0;
+                    $formattedDate = \Carbon\Carbon::parse($data_lau->tanggal_tagihan)->locale('id')->translatedFormat('d F Y');
                 @endphp
-                @foreach ($laundry as $data_lau)
-                    <div class="col-md-3 mb-4">
-                        <div class="card card-custom" style="background-color: {{ $colors[$colorIndex % count($colors)] }};">
-                            @php
-                                $monthName = \Carbon\Carbon::parse($data_lau->tanggal_tagihan)->locale('id')->translatedFormat('F');
-                            @endphp
-                            <div class="card-body">
-                                <h5>{{ $monthName }}</h5>
-                                <p>Rp. {{ $data_lau['jumlah']}}</p>
-                                <p>{{ $data_lau['status'] }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    @php
-                        $colorIndex++;
-                    @endphp
-                @endforeach
+                <div class="card-body">
+                    <h5>{{ $formattedDate }}</h5>
+                    <p>Rp. {{ $data_lau['jumlah']}}</p>
+                    <p>{{ $data_lau['status'] }}</p>
+                </div>
             </div>
+        </div>
+        @php
+            $colorIndex++;
+        @endphp
+    @endforeach
+</div>
 
             <div class="row mt-4 justify-content-md-center">
                 <div class="col-lg-7 mb-lg-0 mb-4">
