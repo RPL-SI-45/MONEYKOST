@@ -41,6 +41,7 @@ class ExampleTest extends DuskTestCase
                     ->assertSee ('Daftar Makanan')
                     ->clickLink('Dashboard')
                     ->assertPathIs('/dashboardmain/admin')
+                    
                     ;
         });
     }
