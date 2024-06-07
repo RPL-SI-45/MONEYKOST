@@ -29,6 +29,18 @@ class ExampleTest extends DuskTestCase
                     ->assertSee ('TOTAL CUSTOMER')
                     ->assertSee ('TOTAL PEMBAYARAN KOST')
                     ->assertSee ('FOOD SALES')
+                    ->clickLink ('Menu Makanan')
+                    ->assertPathIs('/dashboard/admin/menumakanan')
+                    ->assertSee ('Daftar Makanan')
+                    ->press ('TAMBAH MAKANAN')
+                    ->assertPathIs('/dashboard/kelolamenumakanan/create')
+                    ->assertSee ('Tambah Menu')
+                    ->press ('Tambah')
+                    ->clickLink ('Menu Makanan')
+                    ->assertPathIs('/dashboard/admin/menumakanan')
+                    ->assertSee ('Daftar Makanan')
+                    ->clickLink('Dashboard')
+                    ->assertPathIs('/dashboardmain/admin')
                     ;
         });
     }
