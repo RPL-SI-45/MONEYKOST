@@ -54,7 +54,7 @@
             @error('grandTotal') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
       </div>
       <div class="card-body d-flex justify-content-center">
-        <button type="submit" class="btn btn-lg btn-info w-50 btn-rounded mt-0 mb-0">Bayar</button>
+        <button type="submit" dusk="submit" class="btn btn-lg btn-info w-50 btn-rounded mt-0 mb-0">Bayar</button>
       </div>
     </div>
   </form>
