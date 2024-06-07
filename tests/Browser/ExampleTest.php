@@ -23,6 +23,12 @@ class ExampleTest extends DuskTestCase
                     ->assertPathIs('/dashboardmain/customer')
                     ->clickLink('Dashboard')
                     ->assertPathIs('/dashboardmain/admin')
+                    ->assertSee ('Top Foods')
+                    ->assertSee ('Money Kost')
+                    ->assertSee ('TOTAL PEMBAYARAN')
+                    ->assertSee ('TOTAL CUSTOMER')
+                    ->assertSee ('TOTAL PEMBAYARAN KOST')
+                    ->assertSee ('FOOD SALES')
                     ;
         });
     }
