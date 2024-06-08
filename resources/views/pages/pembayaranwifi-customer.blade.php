@@ -8,7 +8,7 @@
                 <div class="card mb-4">
                 <div class="card-header pb-0 d-flex align-items-center justify-content-between">
                         <h6>Pembayaran Wifi</h6>
-                        <button type="button" class="btn btn-outline-info"><a href="{{route('tambah.wifi')}}" class="text-center text-uppercase text-secondary">Beli Paket</a></button>
+                        <button dusk="belipaket"type="button" class="btn btn-outline-info"><a href="{{route('tambah.wifi')}}" class="text-center text-uppercase text-secondary">Beli Paket</a></button>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
